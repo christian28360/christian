@@ -1,0 +1,44 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{%set menuApp = 'administration' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>Import des données</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Rapport de l'import, environnement : {{ environment }}, durée : {{ duration }}</small></h3>
+{#{{ dump(mode) }}#}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Fichier</th>
+            <th>Etat</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file, errors in report %}
+            <tr>
+                <td>{{ file }}</td>
+                <td>
+                    {% if errors is iterable %}
+                        <table class="table table-striped">
+                            <tbody>
+                                {% for line, error in errors %}
+                                    <tr>
+                                        <td>{{ line }}</td>
+                                        <td>{{ error }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        {{ errors }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

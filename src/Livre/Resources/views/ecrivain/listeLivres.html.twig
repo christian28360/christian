@@ -1,0 +1,50 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{% set menu = 'liste' %}
+{% set route = 'ecrivain' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ route }}</li>
+    <li>Liste des livres</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Liste des livres par écrivain
+    </h3>
+
+    <div class="table-responsive row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table id="dataTable" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="w3">Nom</th>
+                        <th class="w1">Nb</th>
+                        <th class="w9">Livres</th>
+                    </tr>
+                </thead>
+                {% for ecrivain in records %}
+                    <tr>
+                        <td class="text-right">
+                            {{ ecrivain.nom ~ ', ' ~ ecrivain.prenom }}
+                        </td>
+                        <td class="text-center">
+                            {{ ecrivain.livres|length }}
+                        </td>
+                        <td>
+                            {% for livre in ecrivain.livres %}
+                                {{ livre.titre }}<br />
+                            {% else %}
+                                -----
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+{% endblock %}

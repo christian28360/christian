@@ -1,0 +1,84 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Saisons' %}
+{% set titre = 'saison' %}
+{% set route = 'bowling-periode' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}s
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'f', 'titre': titre, } %}
+        </small>
+    </h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Act.</th>
+                    <th>Saison</th>
+                    <th>Nb jnées</th>
+                    <th>Nb parties</th>
+                    <th>Moyenne</th>
+                    <th>Début saison</th>
+                    <th>Fin saison</th>
+                    <th>Créé le</th>
+                    <th>Modifié le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr {% if record.isActive == true %}class="blue"{% endif %}>
+                        <td class="text-center">
+                            {% if record.isActive != true %}
+                                <a href="{{ path(route ~ '-activate', {'id' : record.id} ) }}"
+                                   title="Click pour activer la pérode"
+                                   <span class="glyphicon glyphicon-flash"></span>
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ record.dtDeb|date('Y') }}{{ record.dtFin|date('/Y') }}</td>
+                        <td class="text-center">{{ record.journees.count|number_format(0, ',', ' ') }}</td>
+                        <td class="text-center">{{ record.nbparties|number_format(0, ',', ' ') }}</td>
+                        <td class="text-center">{{ record.moyenneAnnuelle["moyenneScore"]|number_format(2, ',', ' ') }}</td>
+                        <td class="text-center">{{ record.dtDeb|date('d/m/Y') }}</td>
+                        <td class="text-center">{{ record.dtFin|date('d/m/Y') }}</td>
+                        <td class="text-center">{{ record.creeLe|date('d/m/Y') }}</td>
+                        <td class="text-center">{{ record.modifieLe|date('d/m/Y') }}</td>
+                        <td class="text-center">
+                            <a href="{{ path(route ~ '-delete', {'id' : record.id} ) }}"
+                               title="Supprimer l'enregistrement">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center">
+                            <dfn>Pas encore de {{ menu }} spécifique de définie</dfn>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+{% endblock %}
+
+{% block javascripts %}    
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+        });
+        
+    </script>
+{% endblock %}

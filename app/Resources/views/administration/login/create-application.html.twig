@@ -1,0 +1,32 @@
+{% extends "app/Resources/views/administration/login/layout.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{% set menuApp = 'application' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        Création d'une application
+    </li>
+{% endblock %}
+
+{% block content %}
+    <h3>Gestion des logins <small>Création d'une application</small></h3>
+    
+    {{ form_start(form, { 'attr': { 'role': 'form' } }) }}
+
+    {{ form_errors(form) }}
+
+    {% include 'app/Resources/views/administration/login/fragments/application-form.html.twig' %}
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ baseRoutePrefix }}/libraries/jquery/jquery-ui.min.js"></script>
+    <script src="{{ baseRoutePrefix }}/js/common/login/application.js"></script>
+{% endblock %}

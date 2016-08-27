@@ -1,0 +1,10 @@
+<link href="{{ baseRoutePrefix }}/libraries/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="{{ baseRoutePrefix }}/css/common/global.css" rel="stylesheet" />
+<link href="{{ baseRoutePrefix }}/css/modules/gestionReservationAuto/global.css" rel="stylesheet" />
+<h3>{{res.voiture.vehicule}}</h3>
+<p> <b>Date de début :</b> {{res.dateDebut|date('d/m/Y H')}}h<br><br>
+    <b>Date de fin : </b>{{res.dateFin|date('d/m/Y H')}}h<br/><br>
+    <b>Par: </b>{{res.user.nom}} {{res.user.prenom}}<br/><br>
+    <b>Départ : </b>{{res.depart}}<br/><br>
+    <b>Destination : </b>{{res.destination}}<br/><br>
+    <b>Motif : </b>{{res.motif}}</p>

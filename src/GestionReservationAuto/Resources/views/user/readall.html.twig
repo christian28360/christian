@@ -1,0 +1,53 @@
+{%set menu = 'user' %}
+
+{% extends "src/GestionReservationAuto/Resources/views/layout.html.twig" %}
+
+    
+
+{% block content %}
+    <h3>Liste des utilisateurs</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <th>RH</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Grade</th>
+                    <th>Mail</th>
+                    <th>Perimetre</th>
+                    <th>Service</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                {% for use in lesUser %}
+                    <tr>
+                        <td>{{use.idUser}}</td>
+                        <td>{% filter upper %}{{use.sourceAgent.ageNomUsuel}}{% endfilter %}</td>
+                        <td>{% filter title %}{{use.prenom}}{% endfilter %}</td>
+                        <td>{{use.grade}}</td>
+                        <td>{{use.sourceAgent.ctcMessagerie}}</td>
+                        {%if use.perimetre is empty%}
+                            <td></td>
+                        {%else%}
+                            <td>{{use.perimetre.libelle}}</td>
+                        {%endif%}
+                        <td>{{use.sourceAgent.sourceOrgaAffectectation.regCode}} - {{use.sourceAgent.sourceOrgaAffectectation.entLibelle}}</td>
+                        <td><a href="{{ path('gestion-reservation-auto-user-update', {'id': use.idUser}) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a href="{{ path('gestion-reservation-auto-user-delete', {'id': use.idUser}) }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}{# empty Twig template #}
+{% block javascripts %}
+    {{parent()}}
+    <script type="text/javascript">
+            $(document).ready(function(){
+                $('#myTable').dataTable( {
+                    "order": [[ 0, "desc" ]]
+                } );
+            });
+        </script>
+{%endblock%}

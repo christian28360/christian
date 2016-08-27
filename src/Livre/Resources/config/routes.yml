@@ -1,0 +1,128 @@
+livre-homepage:
+    path: /homepage
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\DefaultController::homeAction' }
+
+livre-livre:
+    path: /livre
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::listeAction' }
+
+livre-livre-ajout:
+    path: /livre/ajout
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::ajoutAction' }
+
+livre-livre-update:
+    path: /livre/update
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::updateAction' }
+    requirements: 
+        id: \w+
+
+livre-livre-update-col:
+    path: /livre/update/flag
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::updateColAction' }
+    requirements:
+        col:   \w+
+        id:    \w+
+
+livre-livre-delete:
+    path: /livre/delete
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::deleteAction' }
+
+livre-a-lire:
+    path: /livre/lire
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::livreALireAction' }
+
+livre-avec-vocabulaire:
+    path: /livre/vocabulaire
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::livreAvecVocabulaireAction' }
+
+livre-en-stock:
+    path: /livre/livre-en-stock
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::livreEnStockAction' }
+
+livre-plus-en-stock:
+    path: /livre/livre-plus-en-stock
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\LivreController::livrePlusEnStockAction' }
+
+livre-ecrivain:
+    path: /ecrivain
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EcrivainController::listeAction' }
+
+livre-ecrivain-ajout:
+    path: /ecrivain/ajout
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EcrivainController::ajoutAction' }
+
+livre-ecrivain-update:
+    path: /ecrivain/update
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EcrivainController::updateAction' }
+
+livre-ecrivain-delete:
+    path: /ecrivain/delete
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EcrivainController::deleteAction' }
+
+livre-ecrivain-livres:
+    path: /ecrivain/livres
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EcrivainController::listeLivresAction' }
+
+livre-editeur:
+    path: /editeur
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EditeurController::listeAction' }
+
+livre-editeur-ajout:
+    path: /editeur/ajout
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EditeurController::ajoutAction' }
+
+livre-editeur-update:
+    path: /editeur/update
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EditeurController::updateAction' }
+
+livre-editeur-delete:
+    path: /editeur/delete
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EditeurController::deleteAction' }
+
+livre-editeur-livres:
+    path: /editeur/livres
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\EditeurController::listeLivresAction' }
+
+livre-theme:
+    path: /theme
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\ThemeController::listeAction' }
+
+livre-theme-ajout:
+    path: /theme/ajout
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\ThemeController::ajoutAction' }
+
+livre-theme-update:
+    path: /theme/update
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\ThemeController::updateAction' }
+
+livre-theme-delete:
+    path: /theme/delete
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\ThemeController::deleteAction' }
+
+livre-theme-livres:
+    path: /theme/livres
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\ThemeController::listeLivresAction' }
+
+livre-couverture:
+    path: /couverture
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\CouvertureController::listeAction' }
+
+livre-couverture-ajout:
+    path: /couverture/ajout
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\CouvertureController::ajoutAction' }
+
+livre-couverture-update:
+    path: /couverture/update
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\CouvertureController::updateAction' }
+
+livre-couverture-delete:
+    path: /couverture/delete
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\CouvertureController::deleteAction' }
+
+livre-couverture-livres:
+    path: /couverture/livres
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\CouvertureController::listeLivresAction' }
+
+livre-backup:
+    path: /livre/backup
+    defaults: { _controller: 'CHRIST\Modules\Livre\Controller\BackupController::backupAction' }

@@ -1,0 +1,149 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Reporting' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation extrèmes</li>
+    {% endblock %}
+
+{% block content %}
+    {#    <h3>Consultation des extrèmes</h3>#}
+
+    <div class="table-responsive row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table table-bordered table-hover">
+                <caption><h4>Consultation des extrèmes</h4></caption>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Saison</th>
+                        <th colspan="4">Minimum</th>
+                        <th colspan="4">Maximum</th>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>Strikes</th>
+                        <th>Spares</th>
+                        <th>Date</th>
+                        <th>Score</th>
+                        <th>Strikes</th>
+                        <th>Spares</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, record in records %}
+                        <tr class="next">
+                            <td rowspan="11" class="text-center w1">
+                                <a href="{{ path('bowling-statistiques-extremes-graph') }}"
+                                   title="Voir le graphique"
+                                   alt="Voir le graphique" >
+                                    <span class="glyphicon glyphicon-stats"></span>
+                                </a>
+                                <br /><br /><br />
+                                <b>{{ key }}</b>
+                            </td>
+                            {% for data in 0 .. 9  %}
+                                <td class="text-center w1 separ-gauche">
+                                    {% if record.min[data] is defined %}
+                                        {% if record.min[data].date is defined %}
+                                            {{ record.min[data].date  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1">
+                                    {% if record.min[data] is defined %}
+                                        {% if record.min[data].score is defined %}
+                                            {{ record.min[data].score  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1">
+                                    {% if record.min[data] is defined %}
+                                        {% if record.min[data].strike is defined %}
+                                            {{ record.min[data].strike  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1">
+                                    {% if record.min[data] is defined %}
+                                        {% if record.min[data].spare is defined %}
+                                            {{ record.min[data].spare  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1 separ-gauche">
+                                    {% if record.max[data] is defined %}
+                                        {% if record.max[data].date is defined %}
+                                            {{ record.max[data].date  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1">
+                                    {% if record.max[data] is defined %}
+                                        {% if record.max[data].score is defined %}
+                                            {{ record.max[data].score  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1">
+                                    {% if record.max[data] is defined %}
+                                        {% if record.max[data].strike is defined %}
+                                            {{ record.max[data].strike  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center w1">
+                                    {% if record.max[data] is defined %}
+                                        {% if record.max[data].spare is defined %}
+                                            {{ record.max[data].spare  }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td class="text-center separ-gauche"><b>Moyennes</b></td>
+                            <td class="text-center"><b>{{ record.min.Moyenne.score|number_format(2, ',', ' ') }}</b></td>
+                            <td class="text-center"><b>{{ record.min.Moyenne.strike|number_format(2, ',', ' ') }}</b></td>
+                            <td class="text-center"><b>{{ record.min.Moyenne.spare|number_format(2, ',', ' ') }}</b></td>
+                            <td class="text-center separ-gauche"><b>Moyennes</b></td>
+                            <td class="text-center"><b>{{ record.max.Moyenne.score|number_format(2, ',', ' ') }}</b></td>
+                            <td class="text-center"><b>{{ record.max.Moyenne.strike|number_format(2, ',', ' ') }}</b></td>
+                            <td class="text-center"><b>{{ record.max.Moyenne.spare|number_format(2, ',', ' ') }}</b></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> 
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type='text/javascript'>
+        $(function ()
+        {
+            $(".tooltip").tooltip();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Journées' %}
+{% set titre = 'journée' %}
+{% set route = 'bowling-journee' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation/résumé</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation résumée des {{ nbRecords }} {{ titre }}{{ nbRecords > 1 ? 's' : ''}}
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'f', 'titre': titre, } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table id="dataTable" 
+                    class="table table-bordered table-hover compact">
+                <thead>
+                    <tr>
+                        <th>Maj</th>
+                        <th>Jour</th>
+                        <th>Date</th>
+                        <th></th>
+                        <th>Evènement</th>
+                        <th>Hand.</th>
+                        <th>Moy.</th>
+                        <th>Nb séries</th>
+                        <th>Nb parties</th>
+                    </tr>
+                </thead>
+                {# pour chaque journée#}
+                {% for jnee in records %}
+                    <tr title="Double click pour modifier la ligne"
+                        id="{{ jnee.id }}"
+                        >
+                        <td class="text-center w1"
+                            id="idJnee{{ jnee.id }}"
+                            >
+                            <a href="{{ path(route ~ '-update', {'id' : jnee.id} ) }}"
+                               title="Modifier la journée"
+                               alt="Modifier la journée" >
+                                <span class="glyphicon glyphicon-pencil">&nbsp;</span>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            {{ jnee.dateJournee|strftime('%A') }}
+                        </td>
+                        <td class="text-left">
+                            {{ jnee.dateJournee|strftime('%Y/%m/%d') }}
+                        </td>
+                        <td class="text-center">
+                            {{ jnee.evenement.typeJeu is null ? '-' : jnee.evenement.typeJeu.typeJeu }}
+                        </td>
+                        <td class="text-left">
+                            {{ jnee.evenement.typeJeu.libelle is null ? '--' : jnee.evenement.typeJeu.libelle }}, 
+                            {{ jnee.evenement.libelle is null ? '--' : jnee.evenement.libelle }},
+                            {{ jnee.bowling is null ? '--' : jnee.bowling.nom }}
+                        </td>
+                        <td class="text-center separ-gauche">{{ jnee.handicap }}</td>
+                        <td class="text-center">
+                            {{ jnee.moyenne == 0 ? '-' : jnee.moyenne|number_format(2, ',', ' ') }}
+                        </td>
+                        <td class="text-center">{{ jnee.nbSeries }}</td>
+                        <td class="text-center">{{ jnee.nbScores }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="text-center"
+                            colspan="33">
+                            <b>Pas de journée sur cette saison</b>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {# Fin journée #}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}    
+    {{parent()}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var idJnee = 0;
+            $(document).on("dblclick", "tr", function (e) {
+
+                // Id de la journée de la ligne double-cliquée
+                idJnee = $(e.target.parentNode).attr("id");
+                // reroutage sur le TD qui a été cliqué
+                window.location.href = "{{ path(route ~ '-update' ) }}?id=" + idJnee;
+
+                return true;
+
+            });
+        });
+
+    </script>
+{% endblock %}

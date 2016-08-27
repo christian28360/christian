@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>{% block metaTitle %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        {% block stylesheets %}
+            <link href="{{ baseRoutePrefix }}/libraries/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+            <link href="{{ baseRoutePrefix }}/css/common/global.css" rel="stylesheet" />
+            <link rel="icon" href="{{ baseRoutePrefix }}/img/moi.ico" type="image/x-icon" />
+{#            <link rel="icon" href="{{ baseRoutePrefix }}/img/favicon.ico" type="image/x-icon" />#}
+        {% endblock %}
+    </head>
+    <body>
+        <ol class="breadcrumb">
+            <li>
+                Vous êtes ici : 
+            </li>
+        {% block breadcrumb %}{% endblock %}
+        {% if menu is not defined %}
+            {% set menu = '' %}
+        {% endif %}
+
+        {% if menu == 'portail' %}
+            <li>Portail</li>
+            {% endif %}
+        <li class="last">
+            {{ render(url('user-badge')) }}
+        </li>
+    </ol>
+
+    {% include 'app/Resources/views/fragments/errors-message.html.twig' %}
+
+    <div class="container">
+        <header>
+            <div class="page-header">
+                <div class="pull-left">
+                    <h1>
+                        CA - {% block title %}Portail des applications de Christian ALCON{% endblock %}
+                    </h1>
+                    <h2>
+                        {% if menu != 'portail' %}
+                            <a href="{{ path('homepage') }}">Retour Portail</a>
+                        {% endif %}
+                        <small>{{ 'Nous sommes ' ~ date()|strftime('%A %d %B %Y') }}</small>
+                    </h2>
+                </div>
+                <div class="pull-right hidden-print">
+                    {% block headerPicture %}
+                        <img src="{{ baseRoutePrefix }}/img/moi.jpg" />
+                    {% endblock %}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    {% block menu %}
+                        {% include 'app/Resources/views/fragments/menu-portail.html.twig' %}
+                    {% endblock %}
+                </div>
+
+            </nav>
+        </header>
+
+        {% include 'app/Resources/views/fragments/flashMessage.html.twig' %}
+    {% block content %}{% endblock %}
+</div>
+{% block javascripts %}    
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js "></script>
+
+    <script src="{{ baseRoutePrefix }}/libraries/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+
+            $('#dataTable').DataTable({
+                "language": {
+                    "info": "Affichage page _PAGE_ sur _PAGES_",
+                    "decimal": ",",
+                    "emptyTable": "No data available in table",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+                    "infoFiltered": "(filtré sur un total de _MAX_ entrées)",
+                    "infoPostFix": "",
+                    "thousands": " ",
+                    "lengthMenu": "Afficher _MENU_ entrées/page",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Recherche multicritères :  ",
+                    "zeroRecords": "Aucun enregistrement trouvé",
+                    "paginate": {
+                        "first": "Début",
+                        "last": "Dernier",
+                        "next": "Suivant",
+                        "previous": "Précédent"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    }
+                }});
+            function toStringDate(dateObject) {
+
+                var jour = dateObject.getDate();
+                var mois = dateObject.getMonth() + 1;
+                var an = dateObject.getFullYear();
+                return Right('00' + jour, 2) + "/" + Right('00' + mois, 2) + "/" + an;
+            }
+            function addDate(dateObject, numDays) {
+
+                dateObject.setDate(dateObject.getDate() + numDays);
+                return dateObject;
+            }
+            function Left(str, n) {
+                if (n <= 0)
+                    return "";
+                else if (n > String(str).length)
+                    return str;
+                else
+                    return String(str).substring(0, n);
+            }
+            function Right(str, n) {
+
+                if (n <= 0)
+                    return "";
+                else if (n > String(str).length)
+                    return str;
+                else {
+                    var iLen = String(str).length;
+                    return String(str).substring(iLen, iLen - n);
+                }
+            }
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

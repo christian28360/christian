@@ -1,0 +1,12 @@
+{{ user }}
+
+{#
+{% if user.isNew() %}
+    Anonyme
+{% else %}
+    {{ user.getFullName() }}
+{% endif %}
+    
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    (<a href="{{ path('logout') }}">Déconnexion</a>)
+{% endif %}#}

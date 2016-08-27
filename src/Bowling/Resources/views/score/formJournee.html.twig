@@ -1,0 +1,71 @@
+<section id="container-journee" class="coinsArrondis bleu ">
+    <div class="row">
+        <div class="col-md-4 form form-inline text-left">
+            {{ form_row(form.save) }}
+            {{ form_row(form.new) }}
+            <a href="{{ path('bowling-journee-consult') }}">{{ form_row(form.quitter) }}</a>
+            {{ form_row(form.annuler) }}
+            {# Hidden check box for Jquery : form.nouvelleJnee #}
+            {{ form_row(form.nouvelleJnee) }} 
+        </div>
+        <div class="col-md-2 text-left">
+            <button type="button" class="btn btn-success">
+                Moyenne : <span id="moyenneJnee">{{ moyenne|number_format(2, ',', ' ') }}</button>
+        </div>
+        <div class="col-md-6 text-left">
+            <span type="button" class="btn">
+                {{ form_row(form.tournoi) }}
+            </span>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="form-group col-md-4 text-left">
+            {{ form_row(form.evenement) }}
+        </div>
+        <div class="form-group col-md-3 text-left">
+            {{ form_row(form.bowling) }}
+        </div>
+
+        <div class="form-group col-md-2 text-left">
+            {{ form_row(form.handicap) }}
+        </div>
+        <div class="form-group col-md-3 text-left">
+            {{ form_row(form.dateJournee) }}
+        </div>
+    </div>
+
+    <div class="row">
+        {% for tournoi in form.tournoi %}
+            {{ include('src/Bowling/Resources/views/score/formTournoi.html.twig', 
+                            { 
+                                'tournoiField': tournoi,
+                            }
+                       )
+            }}
+        {% endfor %}
+    </div>
+
+    <section id="container-serie" 
+             data-prototype-sr="
+             {% filter escape %}
+                 {{ include('src/Bowling/Resources/views/score/formSerie.html.twig', 
+                                { 
+                                    'seriesField': form.series.vars.prototype,
+                                }
+                            )
+                 }}
+             {% endfilter %}">
+        {% for serie in form.series %}
+            {{ include('src/Bowling/Resources/views/score/formSerie.html.twig', 
+                            { 
+                                'seriesField': serie,
+                                'indexLoop' : loop.index,
+                            }
+                       )
+            }}
+        {% endfor %}
+    </section>
+
+</section>

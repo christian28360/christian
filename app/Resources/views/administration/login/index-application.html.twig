@@ -1,0 +1,101 @@
+{% extends "app/Resources/views/administration/login/layout.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{% set menuApp = 'application' %}
+
+{% block content %}
+    <h3>Gestion des logins</h3>
+    
+    <a href="{{ path('portail-si-admin-login-create-application') }}" class="pull-right">Ajouter une application</a>
+    
+    <div class="clearfix"></div>
+    
+    <table id="applications-table" class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-8">Application</th>
+                <th class="col-md-2">Nombre d'utilisateurs</th>
+                <th class="col-md-2">
+                    <input type="text" id="filter" placeholder="Filtrer" class="form-control" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr data-name="{{ application.name }}">
+                <td><a href="{{ path('portail-si-admin-login-update-application', { 'application' : application.id }) }}">{{ application.name }}</a></td>
+                <td>{{ application.nbUsers }}</td>
+                <td>
+                    <a href="{{ path('portail-si-admin-login-index-accreditation', { 'application' : application.id }) }}">accréditation</a>
+                     / 
+                    <a href="#" data-url="{{ path('portail-si-admin-login-delete-application', { 'application' : application.id }) }}" data-toggle="modal" data-target="#popin-delete-application">supprimer</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan=3 class="text-center"><em>Aucune application existante</em></td>
+            </tr>    
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="clearfix"></div>
+    
+    <a href="{{ path('portail-si-admin-login-create-application') }}" class="pull-right">Ajouter une application</a>
+
+    <div class="modal fade" id="popin-delete-application" tabindex="-1" role="dialog" aria-labelledby="Êtes-vous certain de vouloir supprimer cette application ?" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Êtes-vous certain de vouloir supprimer cette application ?</h4>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous certain de vouloir supprimer cette application ?<br />
+                    <em><b>Attention</b> cette action est définitive</em>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" class="form-inline" id="form-delete-application">
+                        <input type="hidden" id="_method" name="_method" value="DELETE" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <input type="submit" value="Supprimer" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    $(document).ready(function () {
+
+        // Available filter
+        $(document).on("keyup", "#filter", function(e){
+            e.preventDefault();
+
+            if ($(this).val() == '') {
+                $( "#applications-table > tbody > tr" ).show();
+                return false;
+            }
+
+            $( "#applications-table > tbody > tr" ).hide();
+            $('#applications-table > tbody > tr').filter(function() {
+                var regex = new RegExp($('#filter').val(), "i");
+                return String($(this).data('name')).match(regex);
+            }).show();
+
+            return false;
+        });
+            
+        $('#popin-delete-application').on('show.bs.modal', function (e) {
+
+            $('#form-delete-application').get(0).setAttribute('action', $(e.relatedTarget).data('url'));
+        });
+    });
+    </script>
+{% endblock %}

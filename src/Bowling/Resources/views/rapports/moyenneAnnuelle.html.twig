@@ -1,0 +1,58 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Reporting' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Moyenne annuelle</li>
+    {% endblock %}
+
+{% block content %}
+    <div class="table-responsive">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+            <table class="table table-bordered table-hover">
+                <caption><h2>Moyennes annuelles</h2></caption>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Saison</th>
+                        <th colspan="6">Cumuls</th>
+                        <th colspan="6">Moyennes</th>
+                    </tr>
+                    <tr>
+                        <th>Jnées</th>
+                        <th>Parties</th>
+                        <th>Scores</th>
+                        <th>Strikes</th>
+                        <th>Spares</th>
+                        <th>X & /</th>
+                        <th>My Score</th>
+                        <th>My Strike</th>
+                        <th>My Spare</th>
+                        <th>My X & /</th>
+                        <th>Taux</th>
+                    </tr>
+                </thead>
+                {% for key, record in records %}
+                    <tr {% if key == 'Totaux' %}class="next"{% endif %}>
+                        <td class="text-center">{{ key }}</td>
+                        <td class="text-right separ-gauche">{{ record.nbJournees == 0 ? '-' : record.nbJournees|number_format(0, ',', ' ') }}</td>
+                        <td class="text-right">{{ record.nbParties == 0 ? '-' : record.nbParties|number_format(0, ',', ' ') }}</td>
+                        <td class="text-right separ-gauche">{{ record.score == 0 ? '-' : record.score|number_format(0, ',', ' ') }}</td>
+                        <td class="text-right">{{ record.strike == 0 ? '-' : record.strike|number_format(0, ',', ' ') }}</td>
+                        <td class="text-right">{{ record.spare == 0 ? '-' : record.spare|number_format(0, ',', ' ') }}</td>
+                        <td class="text-right">{{ record.strikeAndSpare == 0 ? '-' : record.strikeAndSpare|number_format(0, ',', ' ') }}</td>
+                        <td class="text-center separ-gauche"><b>{{ record.moyenneScore == 0 ? '-' : record.moyenneScore|number_format(2, ',', ' ') }}</b></td>
+                        <td class="text-center">{{ record.moyenneStrike == 0 ? '-' : record.moyenneStrike|number_format(2, ',', ' ') }}</td>
+                        <td class="text-center">{{ record.moyenneSpare == 0 ? '-' : record.moyenneSpare|number_format(2, ',', ' ') }}</td>
+                        <td class="text-center">{{ record.moyenneStrikeAndSpare == 0 ? '-' : record.moyenneStrikeAndSpare|number_format(2, ',', ' ') }}</td>
+                        <td class="text-right separ-gauche">{{ record.txStrikeAndSpare == 0 ? '-' : record.txStrikeAndSpare|number_format(2, ',', ' ') }}%</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

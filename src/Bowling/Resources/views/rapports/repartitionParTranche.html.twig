@@ -1,0 +1,85 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Reporting' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Ventilation/tranche</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Ventilation par tranche</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Période</th>
+                        {% for i in 9 .. 30 %}
+                        <th>{{ i }}0</th>
+                        {% endfor %}
+                </tr>
+            </thead>
+            {% for key, record in records %}
+                <tr title="Double click pour afficher la répartition graphique pour la saison sélectionnée">
+                    <td class="text-center w1 separ-droite">
+                        <a href="#" 
+                           class            =   "voir-graphique"
+                           id               =   "voir-graphique-{{ key }}"
+                           aria-hidden      =   "true"
+                           data-target      =   "#myModal"
+                           data-toggle      =   "modal"
+                           role             =   "tooltip"
+                           data-placement   =   "bottom"
+                           data-journee     =   "{{ key }}"
+                           title            =   "Affiche le graphique de la ligne"
+                           alt              =   "Affiche le graphique de la ligne"
+                           >
+                            <span class="glyphicon glyphicon-stats"></span>
+                        </a>
+                        {{ key }}
+                    </td>
+                    {% for i in 9 .. 30 %}
+                        <td class="text-center w1">
+                            {% if record[i * 10] is defined %}
+                                {{ record[i * 10] == 0 ? '' : record[i * 10] }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+{#                <div class="modal-header">
+                    Répartition par tranche saison
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+#}                <div class="modal-body">
+                    {% include 'src/Bowling/Resources/views/rapports/fragments/fragmentRepartitionParTrancheGraphique.html.twig' %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                placement: 'top'
+            });
+        });
+    </script>
+{% endblock %}

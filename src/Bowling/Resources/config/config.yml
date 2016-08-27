@@ -1,0 +1,65 @@
+#
+# INCLUDE
+################################################################################
+imports:
+    - { resource: doctrine.yml }
+    - { resource: parameters.yml }
+################################################################################
+
+#
+# CONFIGURATION
+################################################################################
+Livre:
+    ftp:
+        configuration:
+            host: TheWebHoster
+            port: 2021
+            login: NotKnown
+            password: NotKnown
+################################################################################
+
+#
+# CONFIGURATION
+################################################################################
+bowling:
+    mail:
+        configuration:
+            from: 
+                - application.bowling@gmail.com
+            to:
+                - christian.alcon@gmail.com
+                - christian.alcon@laposte.fr
+    import:
+        configuration:
+            dataPath: %parameters_path_rootImport%
+        manifests:
+            journee:
+                entityManager: \CHRIST\Modules\Bowling\ImportManager\JourneeManager
+                wrappers:
+#                    - \CHRIST\Common\Kernel\Modules\Import\Wrappers\FtpWrapper
+                    - \CHRIST\Common\Kernel\Modules\Import\Wrappers\ExcelWrapper
+                file:   scores_bowling_test.xls
+                source: scores_bowling_test.xls
+                saison: '2012/2013'
+                header:
+                    A1: Date_jnee
+                    B1: Score_1
+                    C1: Strike_1
+                    D1: Split_1
+                    E1: Score_2
+                    F1: Strike_2
+                    G1: Split_2
+                    H1: Score_3
+                    I1: Strike_3
+                    J1: Split_3
+                    K1: Score_4
+                    L1: Strike_4
+                    M1: Split_4
+                    O1: Handicap
+                    U1: Nb_gagnes
+                    V1: Bowling
+                    W1: Evenement
+                lines: 
+                    start: 2
+                    end: 0
+ ################################################################################

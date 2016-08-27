@@ -1,0 +1,90 @@
+{% extends "src/Jardinage/Resources/views/layout.html.twig" %}
+
+{% set menu = 'type' %}
+{% set route = 'typePlante' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ menu }}s
+        <small>
+            {% include 'src/Jardinage/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+{#                    <th>Nb évènements</th>#}
+                    <th>Type</th>
+                    <th>Libellé</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr>
+                    <td class="text-center w1">
+                        <a href="{{ path('jardin-' ~ route ~ '-update', {'id' : record.id} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;
+                            </span>
+                        </a>
+                    </td>
+{#                    <td class="text-center w1"> {{ record.evenements.count|number_format(0, ',', ' ') }} </td>#}
+                    <td class="text-center w1">
+                        {{ record.typePlante }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.libelle }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.creeLE is null or record.creeLE|date('Y') == '-0001') ? '-' : record.creeLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.modifieLE is null or record.modifieLE|date('Y') == '-0001') ? '-' : record.modifieLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        <a href="{{ path('jardin-' ~ route ~ '-delete', {'id' : record.id} ) }}"
+                           title="Supprimer l'enregistrement">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'src/Jardinage/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+
+    <div class="modal fade" id="ajout-type" tabindex="-1" role="dialog" aria-labelledby="Recherche d'un véhicule à rajouter dans le parc du site" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="error-update" tabindex="-1" role="dialog" aria-labelledby="Une erreur est survenue" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Une erreur est survenue</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

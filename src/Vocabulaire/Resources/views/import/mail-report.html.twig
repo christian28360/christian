@@ -1,0 +1,42 @@
+{% extends "app/Resources/views/layout-mail.html.twig" %}
+
+{% block title %}Vocabulaire{% endblock %}
+
+{% block content %}
+<h3 style="font-family: 'Trebuchet MS', Verdana, Arial, sans-serif;font-size: 2.3em;font-weight: normal;color: #826041;margin-bottom: 25px;line-height: 1em;">
+    Rapport de l'import 
+    <small style="margin-left: 20px;letter-spacing: 0;font-size: 85%;font-weight: normal;line-height: 1;color: #999;">Mode : insertion, {{ environment }}, durée : {{ duration }}</small>
+</h3>
+
+<table style="border: 1px solid #ddd;width: 100%;margin-bottom: 20px;max-width: 100%;background-color: transparent;border-collapse: collapse;border-spacing: 0;">
+    <thead style="display: table-header-group;vertical-align: middle;border-color: inherit;">
+        <tr style="display: table-row;vertical-align: inherit;border-color: inherit;">
+            <th style="border-bottom-width: 2px;border: 1px solid #ddd;vertical-align: bottom;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;text-align: center;font-weight: bold;display: table-cell;">Fichier</th>
+            <th style="border-bottom-width: 2px;border: 1px solid #ddd;vertical-align: bottom;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;text-align: center;font-weight: bold;display: table-cell;">Etat</th>
+        </tr>
+    </thead>
+    <tbody style="display: table-row-group;vertical-align: middle;border-color: inherit;">
+        {% for file, errors in report %}
+        <tr style="display: table-row;vertical-align: inherit;border-color: inherit;">
+            <td style="border: 1px solid #ddd;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;">{{ file }}</td>
+            <td style="border: 1px solid #ddd;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;">
+                {% if errors is iterable %}
+                <table class="border: 1px solid #ddd;width: 100%;margin-bottom: 20px;max-width: 100%;background-color: transparent;border-collapse: collapse;border-spacing: 0;">
+                    <tbody style="display: table-row-group;vertical-align: middle;border-color: inherit;">
+                        {% for line, error in errors %}
+                        <tr style="display: table-row;vertical-align: inherit;border-color: inherit;">
+                            <td style="border: 1px solid #ddd;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;">{{ line }}</td>
+                            <td style="border: 1px solid #ddd;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;">{{ error }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    {{ errors }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

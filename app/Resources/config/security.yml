@@ -1,0 +1,19 @@
+#
+# SECURITY
+################################################################################
+security:
+    configuration:
+        security.firewalls:
+            secured:
+                pattern: ^/
+                anonymous: true
+                http: false
+                form: 
+                    login_path: /login
+                    check_path: /administration/login_check
+                logout:
+                    logout_path: /administration/logout
+                users: \CHRIST\Common\Security\SecurityUserProvider
+        security.access_rules:
+            - { path: ^/administration(.*), roles: ROLE_PORSIADM, host: portail\*.fr$ }
+################################################################################

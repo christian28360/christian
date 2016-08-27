@@ -1,0 +1,32 @@
+hr.separeMess {
+    height: 2px; 
+    background: black;
+    margin: 10px 0px 0px 0px;
+}
+
+form {
+    margin: 20px 0;
+}
+
+/*.vcenter {
+    align-self: center;
+    height: 500px;
+    min-height: 300px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.vcenter li {
+    padding-bottom: 50px;
+}*/
+.vcenter {
+    display: inline-block;
+    margin-bottom: 5px;
+    max-width: 100%;                 
+}
+
+.row-add-vehicle > input,
+.row-add-vehicle > button,
+.row-add-vehicle > em {
+    margin-left: 15px;
+}

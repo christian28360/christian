@@ -1,0 +1,96 @@
+<div class="container-fluid">
+
+    <div class="row green">
+        <div class="col-md-3 form form-inline text-right bleu">
+            <br />
+            <b>{{ form_row(form.mot) }}</b>
+            <br />
+            {{ form_row(form.page) }}
+            <br />
+            {{ form_row(form.aApprendre) }}
+            <br />
+            {{ form_row(form.creeLe) }}
+            <br />
+        </div>
+        <div class="col-md-6 form form-inline text-left vert">
+            <br />
+            {{ form_row(form.livre) }}
+            <br />
+            {{ form_row(form.typeMot) }}
+            <br />
+            {{ form_row(form.origine) }}
+            <br />
+            {{ form_row(form.signification) }}
+            <br />
+            {{ form_row(form.synonymes) }}
+            <br />
+            {{ form_row(form.extraitLivre) }}
+            <br />
+        </div>
+
+        <div class="col-md-3 form form-inline text-center bleu">
+            <div class="row">
+                <div class="col-md-12 centre text-center">
+                    <br />
+                    <b>Recherche internet</b>
+                </div>
+                <div class="col-md-4 centre text-center">
+                    <br />
+                    <a href='https://www.google.fr/search?tbs=lr:lang_1fr&q=définition+'
+                       target='_blank'
+                       class='wiki'>
+                        <img src="{{ baseRoutePrefix }}/img/modules/vocabulaire/googleSearch.jpg"
+                             alt="Recherche Google"
+                             title="Recherche Google"
+                             width='75%'>
+                        Google
+                    </a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <br />
+                    <a href="http://fr.wiktionary.org/wiki/"
+                       target='_blank'
+                       class='wiki'>
+                        <img src="/img/modules/vocabulaire/wiktionaryLogo.gif"
+                             width="60%"
+                             alt="Rechercher dans le wiktionary de wikipedia"
+                             title="Rechercher dans le wiktionary de wikipedia"/>
+                        <br />
+                        Wiktionary
+                    </a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <br />
+                    <a href="http://fr.wikipedia.org/wiki/"
+                       target='_blank'
+                       class='wiki'>
+                        <img src="/img/modules/vocabulaire/wikipediaLogo.png"
+                             width="68%"
+                             alt="Rechercher dans l'encyclopédie wikipedia"
+                             title="Rechercher dans l'encyclopédie wikipedia"/>
+                        <br />
+                        Wikipedia
+                    </a>
+                </div>
+            </div>
+            <br />
+            {{ form_row(form.trouveDansDicos) }}
+            <br />
+            {{ form_row(form.pasTrouveDansDicos) }}
+            <br />
+        </div>
+    </div>
+
+    <div class="row"><br /></div>
+
+    <div class="row">
+        <div class="col-md-4 form form-inline text-right">
+            {{ form_row(form.save) }}
+            {# Hidden check box for Jquery : form.nouveauMot #}
+            {{ form_row(form.new) }}
+            <a href="{{ path('vocabulaire-mot-liste') }}">{{ form_row(form.quitter) }}</a>
+            {{ form_row(form.annuler) }}
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,18 @@
+#
+# DOCTRINE
+################################################################################
+doctrine:
+    orm:
+        configuration:
+            orm.ems.options:
+                christian:
+                    connection: christian
+#                    query_cache: apc
+#                    metadata_cache: apc
+                    mappings:
+                        typePlante:
+                            type: annotation
+                            namespace: CHRIST\Modules\Jardinage\Entity\TypePlante
+                            path: %parameters_path_rootModules%Jardinage/Entity
+                            use_simple_annotation_reader: false
+################################################################################

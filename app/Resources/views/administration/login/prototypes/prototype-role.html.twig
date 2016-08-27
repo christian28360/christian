@@ -1,0 +1,25 @@
+<li class="row">
+    <div class="odd-form col-md-11">
+
+        <div class="form-group col-md-1 move-handler text-right">
+            <span class="glyphicon glyphicon glyphicon-sort"></span>
+            {{ form_widget(field.level, { 'attr': { 'class': 'form-control input-level hide' } }) }}
+        </div>
+
+        <div class="form-group col-md-5">
+            {{ form_label(field.name) }}
+            {{ form_errors(field.name) }}
+            {{ form_widget(field.name, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+
+        <div class="form-group col-md-5">
+            {{ form_label(field.description) }}
+            {{ form_errors(field.description) }}
+            {{ form_widget(field.description, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        
+        <div class="form-group col-md-12">
+            <a href="#" class="deleteRow pull-right">Supprimer ce rôle</a>
+        </div>
+    </div>
+</li>

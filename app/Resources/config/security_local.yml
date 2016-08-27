@@ -1,0 +1,11 @@
+#
+# SECURITY
+################################################################################
+security:
+    configuration:
+        security.access_rules:
+            - { path: ^/administration(.*), roles: ROLE_PORSIADM, host: portail\.local$ }
+#            - { path: ^/dotc(.*), roles: ROLE_SIMUDOTC, host: simulateur-bugetaire\.courrier\.intra\.laposte\.local$ }
+#            - { path: ^/nationale(.*), roles: ROLE_SIMUNAT, host: simulateur-bugetaire\.courrier\.intra\.laposte\.local$ }
+#            - { path: ^/administration(.*), roles: ROLE_SIMUADM, host: simulateur-bugetaire\.courrier\.intra\.laposte\.local$ }
+################################################################################

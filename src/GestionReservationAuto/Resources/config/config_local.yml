@@ -1,0 +1,19 @@
+#
+# INCLUDE
+################################################################################
+imports:
+    - { resource: config_dev.yml }
+################################################################################
+
+
+#
+# CONFIGURATION
+################################################################################
+optim:
+    mail:
+        configuration:
+            to: thomas.gandroz@gmail.com
+    import:
+        configuration:
+            dataPath: %parameters_path_root%data-local/Gestionreservationauto/
+################################################################################

@@ -1,0 +1,21 @@
+{# Lien pour ajouter un nouveau record :
+        * livre, bowling, légume ...
+        * paramètre 1 : la route racine (le module)
+        * paramètre 2 : le template (qui contiendra le lien) 
+        * paramètre 3 : une variable de retour pour recharger une page spécifique
+#}
+{% if ( route is defined and titre is defined) %}
+    {# Paramètre de page de retour sur validation du formulaire #}
+    {% if retour is defined and retour is not null%}
+        {% set retour = '-' ~ retour %}
+    {% else %}
+        {% set retour = '' %}
+    {% endif %}
+    <a href="{{ path(route ~ '-ajout' ~ retour ) }}">
+        Ajouter un{{ genre == 'f' ? 'e' : '' }} 
+        nouve{{ genre == 'f' ? 'lle' : 'au' }}
+        {{ titre }}
+    </a>
+{% else %}
+    <b>Balise nouvel élément : Paramètre route ou titre non défini</b>
+{% endif %}

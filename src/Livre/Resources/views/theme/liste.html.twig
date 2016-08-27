@@ -1,0 +1,84 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{% set menu = 'theme' %}
+{% set route = 'theme' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} thèmes
+        <small>
+            {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Nb livres</th>
+                    <th>Libellé</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            {% for theme in records %}
+                <tr>
+                    <td class="text-center w1">
+                        <a href="{{ path('livre-' ~ route ~ '-update', {'id' : theme.id} ) }} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;
+                            </span>
+                        </a>
+                    </td>
+                    <td class="text-center w1">{{ theme.livres.count }}</td>
+                    <td>{{ theme.libelle }}</td>
+                    <td class="text-center w1">
+                        {{ (theme.creeLE is null or theme.creeLE|date('Y') == '-0001') ? '-' : theme.creeLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ (theme.modifieLE is null or theme.modifieLE|date('Y') == '-0001') ? '-' : theme.modifieLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        <a href="{{ path('livre-' ~ route ~ '-delete', {'id' : theme.id} ) }}"
+                           title="Supprimer l'enregistrement">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+
+    <div class="modal fade" id="delete-record" tabindex="-1" role="dialog" aria-labelledby="Suppression d'un enregistrement" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="error-update" tabindex="-1" role="dialog" aria-labelledby="Une erreur est survenue" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Une erreur est survenue</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

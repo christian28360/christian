@@ -1,0 +1,13 @@
+<ul class="nav navbar-nav">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applications <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li{% if menu == 'portail-si-vehicule-homepage' %} class="active"{% endif %}><a href="{{ path('homepage') }}">Accueil</a></li>
+            <li{% if menu == 'simulateur-budget-homepage' %} class="active"{% endif %}><a href="{{ path('simulateur-budget-homepage') }}">Simulateur</a></li>
+            <li{% if menu == 'saisie-km-homepage' %} class="active"{% endif %}><a href="{{ path('saisie-km-homepage') }}">Saisie km</a></li>
+            {# acc�s au lien en page ASP : <li{% if menu == 'saisie-km-homepage' %} class="active"{% endif %}><a target="_blank" href="http://www.dtc.courrier.intra.laposte.fr/mr/releve_km/start.asp{#{{ path('saisie-km-homepage') }}}">Saisie km</a></li>#}
+            <li{% if menu == 'saisie-auto9-homepage' %} class="active"{% endif %}><a href="{{ path('saisie-auto9-homepage') }}">Saisie auto9</a></li>
+            {# acc�s au lien en page ASP : <li{% if menu == 'saisie-auto9-homepage' %} class="active"{% endif %}><a target="_blank" href="http://www.dtc.courrier.intra.laposte.fr/mr/auto9/auto9.asp{#{{ path('saisie-auto9-homepage') }} }">Saisie auto9</a></li>#}
+        </ul>
+    </li>
+</ul>

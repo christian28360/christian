@@ -1,0 +1,91 @@
+vocabulaire-homepage:
+    path: /homepage
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\DefaultController::homeAction' }
+
+###################################################################################################
+# Mots
+vocabulaire-mot-liste:
+    path: /mot/liste
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::listeAction' }
+
+vocabulaire-mot-liste-connus:
+    path: /mot/liste/connus
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::listeConnusAction' }
+
+vocabulaire-mot-liste-inconnus:
+    path: /mot/liste/inconnus
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::listeInconnusAction' }
+
+vocabulaire-mot-liste-maj-postImport:
+    path: /mot/liste/maj-postImport
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::listeToUpdateAction' }
+
+vocabulaire-mot-liste-aChercher:
+    path: /mot/liste/aChercher
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::aChercherAction' }
+
+vocabulaire-mot-ajout:
+    path: /mot/ajout
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::ajoutAction' }
+
+vocabulaire-mot-update:
+    path: /mot/update
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::updateAction' }
+
+vocabulaire-mot-update-col:
+    path: /mot/update/flag
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::updateColAction' }
+    requirements:
+        col:   \w+
+        id:    \w+
+
+vocabulaire-mot-delete:
+    path: /mot/delete
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\MotController::deleteAction' }
+
+###################################################################################################
+# Référentiels
+vocabulaire-dictionnaire-liste:
+    path: /dictionnaire/liste
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\DictionnaireController::listeAction' }
+
+vocabulaire-dictionnaire-ajout:
+    path: /dictionnaire/ajout
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\DictionnaireController::ajoutAction' }
+
+vocabulaire-dictionnaire-update:
+    path: /dictionnaire/update
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\DictionnaireController::updateAction' }
+
+vocabulaire-dictionnaire-delete:
+    path: /dictionnaire/delete
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\DictionnaireController::deleteAction' }
+
+vocabulaire-typeMot-liste:
+    path: /typeMot/liste
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\typeMotController::listeAction' }
+
+vocabulaire-typeMot-ajout:
+    path: /typeMot/ajout
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\typeMotController::ajoutAction' }
+
+vocabulaire-typeMot-update:
+    path: /typeMot/update
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\typeMotController::updateAction' }
+
+vocabulaire-typeMot-delete:
+    path: /typeMot/delete
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\typeMotController::deleteAction' }
+
+#############################################################################################
+## Sauvegardes (backups)
+##
+vocabulaire-backup:
+    path: /vocabulaire/backup
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\BackupController::backupAction' }
+
+## Import données
+vocabulaire-import-data:
+    path: /vocabulaire/import
+    defaults: { _controller: 'CHRIST\Modules\Vocabulaire\Controller\ImportController::insertAction' }
+#############################################################################################

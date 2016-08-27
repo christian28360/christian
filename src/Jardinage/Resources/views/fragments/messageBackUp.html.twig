@@ -1,0 +1,35 @@
+{% extends "src/Jardinage/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Sauvegardes' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Sauvegarde des objets utilisés en base de données pour le jardinage</h3>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Messages</th>
+                        </tr>
+                    </thead>
+                    {% for mess in messages.mess %}
+                        <tr>
+                            <td class="text-left">
+                                {{ mess|raw }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

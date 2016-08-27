@@ -1,0 +1,43 @@
+jardin-homepage:
+  path: /homepage
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\DefaultController::homeAction' }
+
+jardin-liste:
+  path: /jardin
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\JardinageController::listeAction' }
+
+jardin-ajout:
+  path: /jardin/ajout
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\JardinageController::ajoutAction' }
+
+jardin-update:
+  path: /jardin/update
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\JardinageController::updateAction' }
+
+jardin-delete:
+  path: /jardin/delete
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\JardinageController::deleteAction' }
+
+#####################################################################################################
+
+jardin-typePlante-liste:
+  path: /jardin/typePlante/consultation
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\typePlanteController::listeAction' }
+
+jardin-typePlante-ajout:
+  path: /jardin/typePlante/ajout
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\typePlanteController::ajoutAction' }
+
+jardin-typePlante-update:
+  path: /jardin/typePlante/update
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\typePlanteController::updateAction' }
+
+jardin-typePlante-delete:
+  path: /jardin/typePlante/delete
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\typePlanteController::deleteAction' }
+
+#####################################################################################################
+
+jardin-backup:
+  path: /jardin/backup
+  defaults: { _controller: 'CHRIST\Modules\Jardinage\Controller\BackupController::backupAction' }

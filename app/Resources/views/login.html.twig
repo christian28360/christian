@@ -1,0 +1,32 @@
+{% extends "app/Resources/views/layout.html.twig" %}
+
+{% block metaTitle %}Authentification{% endblock %}
+{% block title %}Authentification{% endblock %}
+
+{%set menu = 'homepage' %}
+{% block menu %}
+<ul class="nav navbar-nav">
+    <li><a href="{{ app.request.headers.get('referer') }}"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h3>Authentification</h3>
+
+<form action="{{ path('login-check') }}" method="post">
+    <div class="form-group  w6">
+        <label for="username">Login</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+    </div>
+
+    <div class="form-group  w6">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="_password" class="form-control" />
+    </div>
+
+    <div class="form-group  w6">
+        <input type="submit" name="submit" value="Connexion" class="btn btn-default" />
+    </div>
+</form>
+
+{% endblock %}

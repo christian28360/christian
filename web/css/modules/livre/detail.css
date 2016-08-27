@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20 mars 2014, 11:19:47
+    Author     : glr735
+*/
+
+/* Extend bootstrap CSS */
+.table-responsive {
+    min-height: 150px;
+    max-height: 550px;
+}
+
+ul.nav.nav-tabs.nav-justified {
+    margin-top: 15px;
+}
+
+/*
+ * trait au dessus d'une ligne total
+ ****************************************************/
+.table > tfoot > tr > td,
+.table > tfoot > tr > th {
+    border-top: 2px solid #7CC3E7;
+}
+
+/******************************************************************************/
+/*
+ * Ventilation automatique de la largeur des colonnes
+ ****************************************************/
+
+/* 18 colonnes */
+#tableau-parc.table > thead > tr > th {
+    width: 5.5555%; /* 100 / 18 */
+}
+/******************************************************************************/

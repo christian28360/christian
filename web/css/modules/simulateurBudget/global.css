@@ -1,0 +1,36 @@
+/* 
+    Created on : 25 févr. 2014, 16:18:09
+    Author     : glr735
+*/
+@media print {
+    @page {
+        size:   A4;
+        margin: 0.5cm;
+    }
+    
+    html {
+    font-size: 80% !important;
+     }
+
+    .breadcrumb {
+        display:    none !important;
+    }
+
+    .no-print {
+        display:    none !important;
+    }
+    
+    .container {
+        border: 1px solid black;
+    }
+} 
+
+.droite {
+    text-align: right;
+    vertical-align: middle;
+}
+
+.centre {
+    text-align: center;
+    vertical-align: middle;
+}

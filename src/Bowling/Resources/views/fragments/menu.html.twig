@@ -1,0 +1,242 @@
+<ul class="nav navbar-nav">
+
+    <li {% if menu == 'homepage' %} class="active"{% endif %}>
+        <a href="{{ path('bowling-homepage') }}">Accueil</a>
+    </li>
+
+    <li class="dropdown{% if menu == 'Journées' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Journées<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-journee-ajout') }}">
+                    Nouvelle journée
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-journee-consult') }}">
+                    Consultation journées
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-journee-consult-reduit') }}">
+                    Résumé des journées
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('bowling-score') }}">
+                    Scores (brut)
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown{% if menu == 'Reporting' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Etats & stats<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-statistiques-courbe-tendance') }}">
+                    Courbe de tendance
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-statistiques-courbe-tendance-graph') }}">
+                    <span class="glyphicon glyphicon-stats"> Courbe de tendance
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('bowling-statistiques-recap-evenement') }}">
+                    Récaptitulatif par évènement
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-statistiques-moyenne-mensuelle') }}">
+                    Moyenne mensuelle
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-statistiques-moyenne-annuelle') }}">
+                    Moyenne annuelle
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('bowling-statistiques-extremes') }}">
+                    Les extrèmes
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-statistiques-extremes-graph') }}">
+                    <span class="glyphicon glyphicon-stats"></span> Les extrèmes
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-statistiques-tranches') }}">
+                    Répartition par tranche
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-statistiques-tranches-graph') }}">
+                    <span class="glyphicon glyphicon-stats"></span> Répartition par tranche
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown{% if menu == 'Tournois' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Tournois<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-tournoi-ajout') }}">
+                    Nouveau tournoi
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-tournoi') }}">
+                    Suivi tournois
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('bowling-tournoi-planification') }}">
+                    Tournois à planifier
+                </a>
+            </li>
+
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('bowling-organisateur-ajout') }}">
+                    Nouvel organisateur
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-organisateur') }}">
+                    Suivi organisateurs
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li {% if menu == 'Saisons' %} class="active"{% endif %}>
+        <a href="{{ path('bowling-periode') }}">
+            Saisons
+        </a>
+    </li>
+
+    <li class="dropdown{% if menu == 'Entrainements' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Entrainements<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-entrainement') }}">
+                    Suivi entrainements
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-entrainement-sept-dix') }}">
+                    Suivi entrainements 7-10
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li role="presentation" class="dropdown-header">
+                Gestion des carnets d'entrainement
+            </li>
+            <li class="tabulation">
+                <a href="{{ path('bowling-entrainement-carnet-ajout') }}">
+                    Nouveau carnet
+                </a>
+            </li>
+            <li class="tabulation">
+                <a href="{{ path('bowling-entrainement-carnet-liste') }}">
+                    Suivi des carnets
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown{% if menu == 'Editions' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Editions<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-editions-feuille-saisie') }}">
+                    Feuille de saisie des scores
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown{% if menu == 'Référentiels' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Référentiels<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-evenement') }}">
+                    Evènements
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-formation') }}">
+                    Formation
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-bowling') }}">
+                    Bowlings
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('bowling-type') }}">
+                    Types de jeu
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown{% if menu == 'Outils' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Outils<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('bowling-outils-scorer') }}">
+                    Scorer (calcul scores)
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            administration<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li{% if menu == 'administration' %} class="active"{% endif %}>
+                <a href="{{ path('bowling-backup') }}">
+                    Sauvegarde des données
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li title="
+                Importer les données du fichier
+                scores_bowling.xls
+                depuis app\Import">
+                <a href="{{ path('bowling-import-data') }}">
+                    Importer un fichier
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

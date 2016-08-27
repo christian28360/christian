@@ -1,0 +1,73 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Tournois' %}
+{% set titre = 'organisateur' %}
+{% set route = 'bowling-organisateur' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation de{{ nbRecords > 0 ? 's' : ''}}  {{ records|length }} {{ titre }}{{ nbRecords > 0 ? 's' : ''}} 
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Id</th>
+                    <th>Nb tournois</th>
+                    <th>Nom</th>
+                    <th>Date création</th>
+                    <th>Date màj</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# pour chaque organisateur #}
+                {% for organisateur in records %}
+                    <tr>
+                        <td class="text-center w1">
+                            <a href="{{ path(route ~ '-update', {'id' : organisateur.id} ) }}"
+                               title="Modifier l'enregistrement"
+                               alt="Modifier l'enregistrement" >
+                                <span class="glyphicon glyphicon-pencil">&nbsp;
+                                </span>
+                            </a>
+                        </td>
+                        <td class="text-center">{{ organisateur.id }}</td>
+                        <td class="text-center">
+                            {% if organisateur.tournois is not null %}
+                                {{ organisateur.tournois.count }}
+                            {% endif %}
+                        </td>
+                        <td>{{ organisateur.nom }}</td>
+                        <td class="text-center w1">
+                            {{ (organisateur.creeLE is null or organisateur.creeLE|date('Y') == '-0001') ? '-' : organisateur.creeLE|date('d/m/Y') }}
+                        </td>
+                        <td class="text-center w1">
+                            {{ (organisateur.modifieLE is null or organisateur.modifieLE|date('Y') == '-0001') ? '-' : organisateur.modifieLE|date('d/m/Y') }}
+                        </td>
+                        <td class="text-center w1">
+                            <a href="{{ path(route ~ '-delete', {'id' : organisateur.id} ) }}"
+                               title="Supprimer l'enregistrement">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {# Fin organisateur #}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+
+{% endblock %}

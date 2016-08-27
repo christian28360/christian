@@ -1,0 +1,66 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right date">
+            {{ form_row(form.dateDebutTournoi) }}
+        </div>
+        <div class="form-group col-md-3 text-right date">
+            {{ form_row(form.dateTournoi) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.dateLimiteInscription) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.dateInscription) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.commentaire) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.bowling) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.organisateur) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.type) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.nbJoueursOuEquipes) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.classement) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.prix) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.finale) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.finaleJouee) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 form form-inline text-right">
+        {{ form_row(form.annuler) }}
+        {{ form_row(form.save) }}        
+
+        {% set route = 'bowling-tournoi' %}
+        {% if retour is defined and retour != null %}
+            {% set route = route  ~ '-' ~ retour %}
+        {% endif %}
+        <a href="{{ path(route) }}">{{ form_row(form.quitter) }}</a>
+    </div>
+</div>

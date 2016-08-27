@@ -1,0 +1,24 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{%set menu = 'score' %}
+{% set route = 'score' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Ajout</li>
+    {% endblock %}
+
+{% block content %}
+
+    {% include 'app/Resources/views/fragments/titreMode.html.twig' with {'genre': 'm'} %}
+    <h5>Pas de contrôle sur la période<small> (permet de corriger des erreurs de dates)</small></h5>
+
+    {{ form_start(form, { 'attr': { 'role': 'form' }, 'method': 'post' }) }}
+    {{ form_errors(form) }}
+
+    {% include 'src/Bowling/Resources/views/score/formScore.html.twig' %}
+
+    {{ form_end(form) }}
+
+{% endblock %}

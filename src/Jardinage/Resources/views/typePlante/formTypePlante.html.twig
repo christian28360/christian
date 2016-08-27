@@ -1,0 +1,25 @@
+{# Charge et met en forme le formulaire de saisie des types de plantes #}
+
+<div class="form-group  w6">
+    {{ form_label(form.typePlante) }}
+    {{ form_errors(form.typePlante) }}
+    {{ form_widget(form.typePlante, { 'attr': { 'class': 'form-control' } }) }}
+</div>
+
+<div class="form-group  w6">
+    {{ form_label(form.libelle) }}
+    {{ form_errors(form.libelle) }}
+    {{ form_widget(form.libelle, { 'attr': { 'class': 'form-control' } }) }}
+</div>
+
+<div class="form-group  w6">
+    {{ form_label(form.commentaire) }}
+    {{ form_errors(form.commentaire) }}
+    {{ form_widget(form.commentaire, { 'attr': { 'class': 'form-control' } }) }}
+</div>
+
+<div class="col-md-3 form form-inline text-right">
+    {{ form_row(form.annuler) }}
+    {{ form_row(form.save) }}
+    <a href="{{ path('jardin-typePlante-liste') }}">{{ form_row(form.quitter) }}</a>
+</div>

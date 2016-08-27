@@ -1,0 +1,48 @@
+{% extends "app/Resources/views/layout.html.twig" %}
+
+{% block metaTitle %}Jardinage au domicile{% endblock %}
+{% block title %}Suivi activité de jardinage au domicile{% endblock %}
+
+{% block headerPicture %}
+    <img src="{{ baseRoutePrefix }}/img/modules/jardinage/concombres.jpg" />
+    {{ parent() }}
+    <img src="{{ baseRoutePrefix }}/img/modules/jardinage/semeur.jpg" />
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{  menu }}
+    <li><a href="{{ path('homepage') }}">Portail</a></li>
+    <li>
+        {% if menu != 'homepage' %}
+            <a href="{{ path('jardin-homepage') }}">Accueil</a>
+        {% else %}
+            Accueil
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block menu %}
+    {% include 'src/Jardinage/Resources/views/fragments/menu.html.twig' with {'menu': menu } %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+
+//alert('layout chargé');
+            //
+
+        });
+
+    </script> 
+{% endblock %}

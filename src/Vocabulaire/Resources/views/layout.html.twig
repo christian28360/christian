@@ -1,0 +1,43 @@
+{% extends "app/Resources/views/layout.html.twig" %}
+
+{% block metaTitle %}Gestion du vocabulaire{% endblock %}
+{% block title %}Gestion du vocabulaire{% endblock %}
+
+{% block headerPicture %}
+    <img src="/img/modules/vocabulaire/dictionnaire.jpg" alt="Dictionnaire" width='40px' />
+    {{ parent() }}
+    <img src="/img/modules/vocabulaire/wikipediaLogo.png" alt="" width='40px' />
+    <img src="/img/modules/vocabulaire/wiktionaryLogo.gif" alt="" width='30px' />
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path('homepage') }}">Portail</a></li>
+    <li>
+        <a href="{{ path('jardin-homepage') }}">Accueil</a>
+    </li>
+{% endblock %}
+
+{% block menu %}
+    {% include 'src/Vocabulaire/Resources/views/fragments/menu.html.twig' with {'menu': menu } %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+
+//alert('layout chargé');
+            //
+
+        });
+
+    </script> 
+{% endblock %}

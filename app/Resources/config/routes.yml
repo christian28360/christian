@@ -1,0 +1,61 @@
+#
+# GLOBAL
+################################################################################
+homepage:
+    path: /portail
+    defaults: { _controller: 'CHRIST\Common\Controller\DefaultController::homeAction' }
+    host: portail.fr
+
+user-badge:
+    path: /user-badge
+    defaults: { _controller: 'CHRIST\Common\Controller\DefaultController::userBadgeAction' }
+    host: portail.fr
+################################################################################
+
+#
+# AUTHENTIFICATION
+################################################################################
+login:
+  path: /login
+  defaults: { _controller: 'CHRIST\Common\Controller\AuthenticationController::loginAction' }
+  host: portail.fr
+
+login-check:
+  path: /administration/login_check
+  defaults: { _controller: 'CHRIST\Common\Controller\SecureController::loginCheckAction' }
+  host: portail.fr
+  
+logout:
+  path: /administration/logout
+  defaults: { _controller: 'CHRIST\Common\Controller\SecureController::logoutAction' }
+  host: portail.fr
+################################################################################    
+
+#
+# INCLUDE ROUTE
+################################################################################
+portail-admin:
+    prefix: /admin
+    resource: ../../../app/Resources/config/routes-admin.yml
+    host: portail.fr
+
+livre:
+    prefix: /livre
+    resource: ../../../src/Livre/Resources/config/routes.yml
+    host: christian.local
+
+vocabulaire:
+    prefix: /vocabulaire
+    resource: ../../../src/Vocabulaire/Resources/config/routes.yml
+    host: christian.local
+
+bowling:
+    prefix: /bowling
+    resource: ../../../src/Bowling/Resources/config/routes.yml
+    host: christian.local
+
+jardin:
+    prefix: /jardin
+    resource: ../../../src/Jardinage/Resources/config/routes.yml
+    host: christian.local
+################################################################################

@@ -1,0 +1,60 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{% set menu = 'liste' %}
+{% set route = 'livre' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ route }}</li>
+    <li>Livres à lire</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Liste des {{ nbRecords }} livres à lire ou relire</h3>
+
+    <div class="table-responsive row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table id="dataTable" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="w1">Lu</th>
+                        <th class="w8">Livres</th>
+                        <th class="w6">Auteur(s)</th>
+                        <th class="w6">Thème</th>
+                        <th class="w2">Dt Achat</th>
+                    </tr>
+                </thead>
+                {% for livre in records %}
+                    <tr>
+                        <td class="text-center">
+                            <a href="{{ path(route ~ '-livre-update-col', {'id': livre.id, 'col': 'aLire'} ) }}">
+                                <img title="Marquer que que je viens de lire ce livre"
+                                     src="{{ baseRoutePrefix }}/img/modules/livre/aLire.ico" />
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            {{ livre.titre }}
+                        </td>
+                        <td>
+                            {% for auteur in livre.auteurs %}
+                                {{ auteur.prenomNom }}<br />
+                            {% else %}
+                                -----
+                            {% endfor %}
+                        </td>
+                        <td class="text-left">
+                            {{ livre.theme }}
+                        </td>
+                        <td class="text-center">
+                            {{ livre.dateAchat|date('Y/m/d') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+{% endblock %}

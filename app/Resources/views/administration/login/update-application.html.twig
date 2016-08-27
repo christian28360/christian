@@ -1,0 +1,33 @@
+{% extends "app/Resources/views/administration/login/layout.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{% set menuApp = 'application' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        Modification de {{ form.vars.value.name }}
+    </li>
+{% endblock %}
+
+{% block content %}
+    <h3>Gestion des logins <small>Modification de {{ form.vars.value.name }}</small></h3>
+    
+    {{ form_start(form, { 'attr': { 'role': 'form' } }) }}
+    <input type="hidden" id="_method" name="_method" value="PUT" />
+    
+    {{ form_errors(form) }}
+
+    {% include 'app/Resources/views/administration/login/fragments/application-form.html.twig' %}
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ baseRoutePrefix }}/libraries/jquery/jquery-ui.min.js"></script>
+    <script src="{{ baseRoutePrefix }}/js/common/login/application.js"></script>
+{% endblock %}

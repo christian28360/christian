@@ -1,0 +1,103 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Journées' %}
+{% set titre = 'journée' %}
+{% set route = 'score' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>saison</li>
+    <li>Consultation/scores bruts</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des scores bruts</h3>
+
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-bordered table-hover compact">
+            <thead>
+                <tr>
+{#                    <th>JnéeId</th>#}
+                    <th>Evt</th>
+{#                    <th>SérieId</th>#}
+                    <th>SérieNo</th>
+                    <th>SérieDate</th>
+{#                    <th>Id</th>#}
+                    <th>Score</th>
+                    <th>X</th>
+                    <th>/</th>
+                    <th>Splits</th>
+                    <th>Gagnée</th>
+                    <th>Ex.My</th>
+                    <th>Carnet</th>
+                    <th>7/10</th>
+                    <th>Créé</th>
+                    <th>MàJ</th>
+                </tr>
+            </thead>
+            {# pour chaque journée#}
+            {% for jnee in records %}
+                {# pour chaque série #}
+                {% for serie in jnee.series %}
+                    {# pour chaque score #}
+                    {% for score in serie.scores %}
+                        <tr>
+{#                            <td class="text-center">{{ jnee.id }}</td>#}
+                            <td class="text-center">{{ jnee.evenement.typeJeu.typeJeu }}</td>
+{#                            <td class="text-center separ-gauche">{{ serie.id }}</td>#}
+                            <td class="text-center">{{ serie.noSerie }}</td>
+                            <td class="text-center">{{ serie.dateSerie|strftime('%Y/%m/%d %a') }}</td>
+{#                            <td class="text-center separ-gauche">{{ (score.id) }}</td>#}
+                            <td class="text-center w1">{{ (score.score) }}</td>
+                            <td class="text-center w1">{{ (score.strike) }}</td>
+                            <td class="text-center w1">{{ (score.spare) }}</td>
+                            <td class="text-center w1">{{ (score.split) }}</td>
+                            <td class="text-center">
+                                {% if score.gagnee == TRUE %}
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if score.pasCalculMoyenne == TRUE %}
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if score.surCarnetEntrainement == TRUE %}
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if score.septDix == TRUE %}
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center w1">{{ (score.creeLe|date('d/m/y')) }}</td>
+                            <td class="text-center w1">{{ (score.modifieLe|date('d/m/y')) }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td class="text-center"
+                                colspan="3">
+                                Pas de score
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {# Fin score #}
+                {% endfor %}
+                {# Fin série #}
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="text-center"
+                        colspan="33">
+                        <b>Pas de journée sur cette saison</b>
+                    </td>
+                </tr>
+            {% endfor %}
+            {# Fin journée #}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15 sept. 2014, 10:31:04
+    Author     : glr735
+*/
+
+#applications-table {
+    margin: 15px 0;
+}
+
+.odd-form-conteneur {
+    list-style-type: none;
+    padding-left: 15px;
+}
+
+.move-handler {
+    cursor: pointer;
+}
+
+/*
+ * FORM MANAGEMENT ACCREDITATION
+ ******************************************************************************/
+.form-accreditation > .widget-row {
+    margin-bottom: 15px;
+}
+
+.form-accreditation .list-group {
+    padding-left: 15px;
+    overflow-y: scroll;
+}
+
+.form-accreditation .list-group > a{
+    font-weight: bold;
+}
+
+.form-accreditation > .user-row > div[class^='col-md'] {
+    height: 25em;
+}
+
+.form-accreditation > .user-row .allow-deny-button {
+    margin-top: 50%;
+}
+/******************************************************************************/
+
+/*
+ * USER MANAGEMENT
+ ******************************************************************************/
+#users-table {
+    margin: 15px 0;
+}
+/******************************************************************************/

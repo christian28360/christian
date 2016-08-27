@@ -1,0 +1,180 @@
+{% extends "app/Resources/views/administration/login/layout.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{% set menuApp = 'application' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        Gestion des accréditations
+    </li>
+{% endblock %}
+
+{% block content %}
+    <h3>Gestion des accréditations <small>{{ application.name }}</small></h3>
+
+    {{ form_start(form, { 'attr': { 'role': 'form', 'class': 'form-accreditation' } }) }}
+
+    {{ form_errors(form) }}
+
+    <div class="row widget-row">
+        <div class="col-md-5">
+            {{ form_label(form.role) }}
+            {{ form_errors(form.role) }}
+            {{ form_widget(form.role, { 'attr' : { 'data-url' : path('portail-si-admin-login-index-accreditation', {'application' : application.id }) } }) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <label>Disponible(s) :</label>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            {{ form_label(form.users) }}
+            {{ form_errors(form.users) }}
+        </div>
+    </div>
+    <div class="row widget-row user-row">
+        <div class="col-md-5 list-group" 
+             id="available-list"
+             data-prototype="
+            {% filter escape %}
+                {{ include('app/Resources/views/administration/login/prototypes/prototype-user-available.html.twig', { 'loginPlaceholder': '__name__', 'identityPlaceholder': '__identity__' }) }}
+            {% endfilter %}">
+            {% for user in availables %}
+                {{ include(
+                    'app/Resources/views/administration/login/prototypes/prototype-user-available.html.twig', { 
+                        'loginPlaceholder': user.login,
+                        'identityPlaceholder': user.identity
+                }) }}
+            {% endfor %}
+        </div>
+        <div class="col-md-2 text-center">
+            {{ form_widget(form.deny) }}
+            {{ form_widget(form.allow) }}
+        </div>
+        <div class="col-md-5 list-group" 
+             id="accredited-list" 
+             data-prototype="
+            {% filter escape %}
+                {{ include('app/Resources/views/administration/login/prototypes/prototype-user-accredited.html.twig', { 'user': form.users.vars.prototype, 'loginPlaceholder': '__name__', 'identityPlaceholder': '__identity__' }) }}
+            {% endfilter %}">
+            {% for user in form.users %}
+                {{ include(
+                    'app/Resources/views/administration/login/prototypes/prototype-user-accredited.html.twig', { 
+                        'user': user,
+                        'loginPlaceholder': user.vars.data.login,
+                        'identityPlaceholder': user.vars.data.identity 
+                }) }}
+            {% endfor %}
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-5">
+            {{ form_widget(form.filter) }}
+        </div>
+        <div class="hide">
+            {{ form_widget(form.users) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            
+            // Items selection
+            $(document).on("click", ".list-group-item", function(e){
+                e.preventDefault();
+                $(this).toggleClass( "active" );
+                
+                return false;
+            });
+            
+            // Allow users
+            $(document).on("click", "#AccreditationForm_allow", function(e){
+                e.preventDefault();
+                
+                $( "#available-list > a.active" ).each(function() {
+                    var prototype = $("#accredited-list").data("prototype");
+                    var login = $(this).data("login");
+                    prototype = prototype.replace(/__name__/g, login)
+                                         .replace(/__identity__/g, $(this).data("identity"));
+                    
+                    $(this).remove();
+                    
+                    $("#accredited-list").append(prototype);
+                    $("#AccreditationForm_users_" + login + " > option[value='" + login + "']").prop("selected", true);
+                    refreshFilter();
+                });
+                
+                $("form").submit();
+                
+                return false;
+            });
+            
+            // Deny users
+            $(document).on("click", "#AccreditationForm_deny", function(e){
+                e.preventDefault();
+                
+                $( "#accredited-list > a.active" ).each(function() {
+                    var prototype = $("#available-list").data("prototype");
+                    var login = $(this).data("login");
+                    prototype = prototype.replace(/__name__/g, login)
+                                         .replace(/__identity__/g, $(this).data("identity"));
+                    
+                    $(this).remove();
+                    
+                    $("#available-list").append(prototype);
+                    refreshFilter();
+                });
+                
+                $("form").submit();
+                
+                return false;
+            });
+            
+            // Change role
+            $(document).on("change", "#AccreditationForm_role", function(e){
+                e.preventDefault();
+                
+                window.location.replace($(this).data('url') + '/' + $(this).val());
+                
+                return false;
+            });
+            
+            // Available filter
+            $(document).on("keyup", "#AccreditationForm_filter", function(e){
+                e.preventDefault();
+                
+                if ($(this).val() == '') {
+                    refreshFilter();
+                    return false;
+                }
+                
+                $( "#available-list > a" ).hide();
+                $('#available-list > a').filter(function() {
+                    var regex = new RegExp($('#AccreditationForm_filter').val(), "i");
+                    return String($(this).data('login')).match(regex) || String($(this).data('identity')).match(regex);
+                }).show();
+                
+                return false;
+            });
+            
+        });
+        
+        function refreshFilter()
+        {
+            $('#AccreditationForm_filter').val('');
+            $( "#available-list > a" ).show();
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,78 @@
+<section class="coinsArrondis rose">
+    <div class="row">
+        <div class="col-md-2 text-right">
+            <a href="#" 
+               id="new-serie_{{ seriesField.noSerie.vars.value }}" 
+               class="new-serie"
+               >
+                <span class="glyphicon glyphicon-plus"></span>
+                <b>Ajouter une série</b>
+            </a>
+        </div>
+        <div class="form-group col-md-2 text-right">
+            {{ form_row(seriesField.noSerie) }}
+        </div>
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(seriesField.dateSerie) }}
+        </div>
+        
+        <div class="col-md-2 form form-inline text-left">
+            <b>
+                Moyenne : 
+                <span id="moyenneSerie-{{ seriesField.noSerie.vars.value }}">
+                    {% set NoSerie = seriesField.noSerie.vars.value|number_format %}       
+                    {{ moyenneSeries[NoSerie]|number_format(2, ',', ' ') }}
+                </span>
+            </b>
+        </div>
+    </div>
+
+    <section class="coinsArrondis vert">
+        <div class="table-responsive">
+            <div class="col-md-2 text-center">
+                <a href="#" class="new-score" id="new-score_{{ seriesField.noSerie.vars.value }}">
+                    <span class="glyphicon glyphicon-plus" argia-hidden="true"></span>
+                    <b>Nouveau score</b>
+                </a>
+            </div>
+            <div class="col-md-8">
+                <table 
+                    class="table table-bordered table-hover compact"  
+                    data-serie="{{ seriesField.noSerie.vars.value }}"
+                    >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Score</th>
+                            <th>Strike</th>
+                            <th>Spare</th>
+                            <th>Split</th>
+                            <th>Gagnée</th>
+                            <th>Ex. Moy.</th>
+                            <th>Carnet</th>
+                            <th>7/10</th>
+                            <th>Supp.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="container-score_{{ seriesField.noSerie.vars.value }}" 
+                           data-serie="{{ seriesField.noSerie.vars.value }}"
+                           data-prototype-sc="
+                           {% filter escape %}
+                               {{ include('src/Bowling/Resources/views/score/formScore.html.twig', { 'scoresField': seriesField.scores.vars.prototype }) }}
+                           {% endfilter %}">
+                        {% for score in seriesField.scores %}
+                            {{ include('src/Bowling/Resources/views/score/formScore.html.twig', 
+                                            { 
+                                                'scoresField': score, 
+                                                'indexLoop' : loop.index, 
+                                            }
+                                        ) 
+                            }}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</section>

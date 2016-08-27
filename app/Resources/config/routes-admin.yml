@@ -1,0 +1,85 @@
+################################################################################
+# LOG MODULE
+################################################################################
+portail-admin-log-homepage:
+  path: /logs
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\LogController::homeAction' }
+
+################################################################################
+# LOGIN MODULE
+################################################################################
+portail-admin-login-homepage:
+  path: /gestion-login
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\LoginController::indexAction' }
+
+portail-admin-login-application:
+  path: /gestion-login/applications
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\ApplicationController::indexAction' }
+
+portail-admin-login-create-application:
+  path: /gestion-login/application
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\ApplicationController::createAction' }
+  methods: [GET, POST]
+
+portail-admin-login-update-application:
+  path: /gestion-login/application/{application}
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\ApplicationController::updateAction' }
+  requirements: 
+    application: \d+
+  methods: [GET, PUT]
+
+portail-admin-login-delete-application:
+    path: /gestion-login/application/{application}
+    defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\ApplicationController::deleteAction' }
+    requirements: 
+      application: \d+
+    methods: [DELETE]
+  
+###############################
+
+portail-si-admin-login-index-accreditation:
+  path: /gestion-login/accreditation/{application}
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\AccreditationController::indexAction' }
+  requirements: 
+    application: \d+
+  methods: [GET, POST]
+
+portail-si-admin-login-manage-accreditation:
+  path: /gestion-login/accreditation/{application}/{role}
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\AccreditationController::manageAction' }
+  requirements: 
+    application: \d+
+    role: \d+
+  methods: [GET, POST]
+  
+###############################
+portail-si-admin-login-user:
+  path: /gestion-login/utilisateurs
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\UserController::indexAction' }
+
+portail-si-admin-login-create-user:
+  path: /gestion-login/utilisateur
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\UserController::createAction' }
+  methods: [GET, POST]
+
+portail-si-admin-login-update-user:
+  path: /gestion-login/utilisateur/{user}
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\UserController::updateAction' }
+  requirements: 
+    user: \w+
+  methods: [GET, PUT]
+
+portail-si-admin-login-duplicate-user:
+  path: /gestion-login/utilisateur/{user}/duplication
+  defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\UserController::duplicateAction' }
+  requirements: 
+    user: \w+
+  methods: [GET, POST]
+
+portail-si-admin-login-delete-user:
+    path: /gestion-login/utilisateur/{user}
+    defaults: { _controller: 'CHRIST\Common\Controller\Administration\Login\UserController::deleteAction' }
+    requirements: 
+      user: \w+
+    methods: [DELETE]
+################################################################################

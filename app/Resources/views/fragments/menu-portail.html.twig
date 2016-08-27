@@ -1,0 +1,21 @@
+<ul class="nav navbar-nav">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applications <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li{% if menu == 'portail-si-homepage' %} class="active"{% endif %}><a href="{{ path('homepage') }}">Accueil</a></li>
+            <li{% if menu == 'livre-homepage' %} class="active"{% endif %}><a href="{{ path('livre-homepage') }}">Gestion des livres</a></li>
+            <li{% if menu == 'vocabulaire-homepage' %} class="active"{% endif %}><a href="{{ path('vocabulaire-homepage') }}">Gestion du vocabulaire</a></li>
+            <li{% if menu == 'bowling-homepage' %} class="active"{% endif %}><a href="{{ path('bowling-homepage') }}">Suivi bowling</a></li>
+            <li{% if menu == 'jardin-homepage' %} class="active"{% endif %}><a href="{{ path('jardin-homepage') }}">Suivi jardinage</a></li>
+        </ul>
+    </li>
+    {% if 'Christian' == 'Christian' %}
+{#        <li{% if menu == 'tests-graphiques-homepage' %} class="active"{% endif %}>
+            <a href="{{ path('tests-graphiques') }}">tests-graphiques</a>
+        </li>
+#}        <li{% if menu == 'livre-homepage' %} class="active"{% endif %}><a href="{{ path('livre-homepage') }}">Gestion des livres</a></li>
+        <li{% if menu == 'vocabulaire-homepage' %} class="active"{% endif %}><a href="{{ path('vocabulaire-homepage') }}">Gestion du vocabulaire</a></li>
+        <li{% if menu == 'bowling-homepage' %} class="active"{% endif %}><a href="{{ path('bowling-homepage') }}">Suivi bowling</a></li>
+        <li{% if menu == 'jardin-homepage' %} class="active"{% endif %}><a href="{{ path('jardin-homepage') }}">Suivi jardinage</a></li>
+        {% endif %}
+</ul>

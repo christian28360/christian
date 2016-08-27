@@ -1,0 +1,92 @@
+#
+# INCLUDE
+################################################################################
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+################################################################################
+
+#
+# DOCTRINE
+################################################################################
+doctrine:
+    dbal:
+        configuration:
+            dbs.options:
+                christian:
+                    driverClass: %parameters_prod_db_driverClass%
+                    port: 
+                    host: %parameters_prod_db_host%
+                    dbname: christian
+                    user: %parameters_prod_db_user%
+                    password: %parameters_prod_db_password%
+################################################################################
+
+#
+# MONOLOG
+################################################################################
+monolog:
+    level: <?php \Monolog\Logger::ERROR; ?>
+    monolog.logfile: <?php dirname(__DIR__) . '/logs/app.log'; ?>
+    monolog.name:  app
+################################################################################
+
+#
+# SWIFTMAILER
+################################################################################
+swiftmailer:
+    configuration:
+        transport:  gmail
+        encryption: ssl
+        host:       smtp.gmail.com
+        auth_mode:  login
+        encryption: ssl
+        username:   christian.alcon@gmail.com
+        password:   152053415402666
+#    configuration:
+#        swiftmailer.options:
+#            host: mail.log.intra.laposte.fr
+#            port: 25
+################################################################################
+
+#
+# TWIG
+################################################################################
+twig:
+    configuration:
+        twig.options:
+            strict_variables: true
+            cache: <?php dirname(dirname(__DIR__)); ?>/cache/prod
+        twig.path: <?php dirname(dirname(__DIR__)) . '/'; ?>
+    globalsVar:
+        baseRoutePrefix: 
+################################################################################
+
+services:
+    twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+            - { name: twig.extension }
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+
+#
+# CONSOLE
+################################################################################
+console:
+    configuration:
+        console.name: %parameters_application_name%
+        console.version: %parameters_application_version%
+        console.project_directory: %parameters_path_root%/
+################################################################################
+
+#
+# PROFILER
+################################################################################
+profiler:
+    configuration:
+        profiler.cache_dir: <?php __DIR__; ?>/../../cache/profiler
+        profiler.mount_prefix: /_profiler
+################################################################################

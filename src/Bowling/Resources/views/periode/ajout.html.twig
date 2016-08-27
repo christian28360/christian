@@ -1,0 +1,80 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Saisons' %}
+{% set titre = 'saison' %}
+{% set route = 'bowling-periode' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ baseRoutePrefix }}/libraries/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="{{ baseRoutePrefix }}/libraries/bootstrap-datepicker-master/css/datepicker3.css" rel="stylesheet" />
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Ajout</li>
+    {% endblock %}
+
+{% block content %}
+
+    {% include 'app/Resources/views/fragments/titreMode.html.twig' with {'genre': 'f'} %}
+
+    {{ form_start(form, { 'attr': { 'role': 'form' }, 'method': 'post' }) }}
+
+    {{ form_errors(form) }}
+
+    {% include 'src/Bowling/Resources/views/periode/formPeriode.html.twig' %}
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}    
+    {{parent()}}
+    <script src="{{ baseRoutePrefix }}/libraries/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <script src="{{ baseRoutePrefix }}/libraries/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js" type="text/javascript"></script>
+{#    <script src="{{ baseRoutePrefix }}/libraries/bootstrap-datepicker-master/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="{{ baseRoutePrefix }}/libraries/bootstrap-datepicker-master/js/locales/bootstrap-datepicker.fr.js" type="text/javascript"></script>
+#}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var DATE_PICKER_CONFIG = {
+                autoclose: true,
+                calendarWeeks: true,
+                weekStart: 1,
+                language: "fr",
+                daysOfWeekHighlighted: '06',
+{#                startDate: "{{ periode.dtDeb|date('d/m/Y') }}",
+                endDate: "{{ periode.dtFin|date('d/m/Y') }}"
+#}            };
+            $(".datepicker").datepicker(DATE_PICKER_CONFIG);
+
+            $(".dateDebut").datepicker({
+                /*  onClose: function (selectedDate) {
+                 $(".dateFin").datepicker("option", "minDate", selectedDate);
+                 }
+                 */
+                startDate: '-20Y',
+                endDate: '+1Y',
+                endDate: function (selectedDate) {
+                    $(".dateFin").datepicker("option", "endDate", "selectedDate +1Y");
+                }
+            });
+
+            $(".dateFin").datepicker({
+                todayBtn: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                showWeek: true,
+                onClose: function (selectedDate) {
+                    $(".dateDebut").datepicker("option", "startDate", selectedDate);
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

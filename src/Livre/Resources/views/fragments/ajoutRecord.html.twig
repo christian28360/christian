@@ -1,0 +1,12 @@
+{# 
+    Lien pour ajouter un nouveau record :
+        * livre,
+        * thème,
+        * écrivain,
+        * ...
+#}
+<a href="{{ path('livre-' ~ route ~ '-ajout') }}">
+    Ajouter un{{ genre == 'f' ? 'e' : '' }} 
+    nouve{{ genre == 'f' ? 'lle' : 'au' }}
+    {{ menu }}
+</a>

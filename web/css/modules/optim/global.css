@@ -1,0 +1,28 @@
+/* 
+    Created on : 25 févr. 2014, 16:18:09
+    Author     : glr735
+*/
+.container {
+    width: 1038px !important;
+}
+
+#popin-badge-agent-body > div {
+    padding: 5px;
+}
+
+#popin-badge-agent-body > div > .identity {
+    font: 1.7em/1em Verdana, Arial, sans-serif;
+    font-weight: bold;
+}
+
+#popin-badge-agent-body > div > .img-thumbnail {
+    height: 140px;
+}
+
+.btnAddType {
+    margin-right: 15px;
+}
+
+.tableForm {
+    margin-top: 15px;
+}

@@ -1,0 +1,103 @@
+{% extends "src/Vocabulaire/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Vocabulaire' %}
+{% set titre = 'mot' %}
+{% set route = 'vocabulaire-mot' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}s à mettre à jour après l'import en masse depuis Access</h3>
+
+    <div class="table-responsive ">
+        <table class="table table-bordered table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Màj le</th>
+                    <th>Mot</th>
+                    <th>Connu</th>
+                    <th>Type</th>
+                    <th>Origine</th>
+                    <th>Signification</th>
+                    <th>Extrait</th>
+                    <th>Livre</th>
+                    <th>Page</th>
+                    <th>Trouvé dans</th>
+                    <th>Pas Trouvé dans</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr>
+                    <td class="text-center">
+                        <a href="{{ path(route ~ '-update', {'id' : record.id} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;
+                            </span>
+                        </a>
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.modifieLE is null or record.modifieLE|date('Y') == '-0001') ? '-' : record.modifieLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.mot }}
+                    </td>
+                    <td class="text-center">
+                        {% if record.aApprendre == FALSE %}
+                            <span class="glyphicon glyphicon-ok"></span>
+                        {% endif %}
+                    </td>
+                    <td class="text-left">
+                        {{ record.typeMot is null ? '-' : record.typeMot }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.origine }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.signification|raw }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.extraitLivre }}
+                    </td>
+                    <td class="text-left">
+                        {% if record.livre is null %}
+                            Pas dans bibliothèque
+                        {% else %}
+                            {{ record.livre.titre }}
+                            {% for auteur in record.livre.auteurs %}
+                                <br />{{ auteur.nom }}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td class="text-right">
+                        {{ record.page }}
+                    </td>
+
+                    <td class="text-left">
+                        {% for dico in record.trouveDansDicos %}
+                            {{ dico.nom }}<br />
+                        {% else %}
+                            -
+                        {% endfor %}
+                    </td>
+
+                    <td class="text-left">
+                        {% for dico in record.pasTrouveDansDicos %}
+                            {{ dico.nom }}<br />
+                        {% else %}
+                            -
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

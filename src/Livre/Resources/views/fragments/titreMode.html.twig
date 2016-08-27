@@ -1,0 +1,9 @@
+    <h3>
+        {% if mode == 'création' %}
+            Ajout
+        {% else %}
+            Modification
+        {% endif %}
+        d'un{{ genre == 'f' ? 'e' : '' }} 
+        {{ menu }}
+    </h3>

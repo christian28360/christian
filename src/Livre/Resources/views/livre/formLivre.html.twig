@@ -1,0 +1,64 @@
+{# Charge et met en forme le formulaire de saisie des livres #}
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-group col-md-6 text-right">
+            <b>{{ form_row(form.titre) }}</b>
+        </div>
+
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.theme) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6 text-right">
+            {{ form_row(form.auteurs) }}
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 text-right">
+                {{ form_row(form.editeur) }}
+            </div>
+            <div class="form-group col-md-4 text-right">
+                {{ form_row(form.couverture) }}
+            </div>
+            <div class="form-group col-md-4 text-right">
+                {{ form_row(form.anneeCopyright) }}
+            </div>
+            <div class="form-group col-md-4 text-right">
+                {{ form_row(form.dateAchat) }}
+            </div>
+            <div class="form-group col-md-4 text-right">
+                {{ form_row(form.prixAchat) }}
+            </div>
+            <div class="form-group col-md-4 text-right">
+                {{ form_row(form.nbPages) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            {{ form_row(form.remarques) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3 text-left">
+            {{ form_row(form.aLire) }}
+        </div>
+        <div class="form-group col-md-3 text-left">
+            {{ form_row(form.vocabulaire) }}
+        </div>
+
+        <div class="form-group col-md-3 text-left">
+            {{ form_row(form.enStock) }}
+        </div>
+
+        <div class="col-md-3 form form-inline text-right">
+            {{ form_row(form.annuler) }}
+            {{ form_row(form.save) }}
+            <a href="{{ path('livre-livre') }}">{{ form_row(form.quitter) }}</a>
+        </div>
+    </div>
+
+</div>

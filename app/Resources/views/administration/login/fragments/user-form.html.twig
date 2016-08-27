@@ -1,0 +1,67 @@
+<div class="row form-group">
+    <div class="col-md-6">
+        {{ form_label(form.login) }}
+        {{ form_errors(form.login) }}
+        {{ form_widget(form.login) }}
+    </div>
+
+    <div class="col-md-6">
+        {{ form_label(form.password) }}
+        {{ form_errors(form.password) }}
+        {{ form_widget(form.password) }}
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-6">
+        {{ form_label(form.identity) }}
+        {{ form_errors(form.identity) }}
+        {{ form_widget(form.identity) }}
+    </div>
+
+    <div class="col-md-6">
+        {{ form_label(form.contact) }}
+        {{ form_errors(form.contact) }}
+        {{ form_widget(form.contact) }}
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-12">
+        {{ form_label(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+</div>
+
+{{ form_label(form.accreditations) }}
+<div class="panel-group" id="accreditations">
+    {% for application in applications %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accreditations" href="#{{ application.slug }}">
+                        {{ application.name }}
+                    </a>
+                </h4>
+            </div>
+            <div id="{{ application.slug }}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    {% for role in application.roles %}
+                        {% set widget = attribute(form.accreditations.children, role.id) %}
+                        <div class="col-md-3">
+                            {{ form_widget(widget) }}
+                            {{ form_label(widget) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+<div class="form-group pull-right">
+    {{ form_widget(form.save) }}
+</div>

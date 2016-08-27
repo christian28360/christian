@@ -1,0 +1,12 @@
+homepage:
+  path: /
+  defaults: { _controller: 'CHRIST\Common\Controller\DefaultController::homeAction' }
+  host: christian.local
+#
+######################################################################################
+
+#tests-graphiques:
+#    prefix: /testsGraphiques
+#    resource: ../../../src/TestsGraphiques/Resources/config/routes.yml
+#    host: christian.local
+

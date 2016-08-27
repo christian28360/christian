@@ -1,0 +1,70 @@
+{% extends "src/Vocabulaire/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Vocabulaire' %}
+{% set titre = 'mot' %}
+{% set route = 'vocabulaire-mot' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}s à chercher dans un dictionnaire
+        <small>
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table id='dataTable'  class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Mot</th>
+                    <th>Signification</th>
+                    <th>Page</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr>
+                    <td class="text-center">
+                        <a href="{{ path(route ~ '-update', {'id' : record.id} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;
+                            </span>
+                        </a>
+                    </td>
+                    <td class="text-left">
+                        {{ record.mot }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.signification|raw }}
+                    </td>
+                    <td class="text-right">
+                        {{ record.page }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ record.creeLE|date('Y/m/d') }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ record.modifieLE|date('Y/m/d') }}
+                    </td>
+                    <td class="text-center w1">
+                        <a href="{{ path(route ~ '-delete', {'id' : record.id} ) }}"
+                           title="Supprimer l'enregistrement">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

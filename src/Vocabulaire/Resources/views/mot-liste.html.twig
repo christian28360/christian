@@ -1,0 +1,257 @@
+{% extends "src/Vocabulaire/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Vocabulaire' %}
+{% set titre = 'mot' %}
+{% set route = 'vocabulaire-mot' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}s
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table id='dataTable' class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Mot</th>
+                    <th>Date</th>
+                    <th>Connu</th>
+                    <th>Type</th>
+                    <th>Origine</th>
+                    <th class="w3">²&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signification&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;²</th>
+                    <th>Extrait</th>
+                    <th>Livre</th>
+                    <th>Page</th>
+                    <th>Trouvé dans</th>
+                    <th>Pas Trouvé dans</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr
+                    data-mot-id      =   "{{ record.id }}"
+                    data-mot-text    =   "{{ record.mot }}">
+                    <td class="text-center">
+                        <a href="{{ path(route ~ '-update', {'id' : record.id} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">;</span>
+                        </a>
+                        <br />
+                        <br />
+                        <a href="#" 
+                           class            =   "supprimer-mot"
+                           id               =   "supprimer-mot-{{ record.id }}"
+                           aria-hidden      =   "true"
+                           data-target      =   "#deleteMotModal"
+                           data-toggle      =   "modal"
+                           role             =   "tooltip"
+                           data-placement   =   "top"
+                           title            =   "Suppression du mot"
+                           alt              =   "Suppression du mot"
+                           >
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        <!-- For calling trigger modal fullScreen -->
+                        <h4>
+                            <a href="">
+                                <span class="glyphicon glyphicon-eye-open openFull"  
+                                      data-toggle="modal" 
+                                      data-target="#fullScreen"
+                                      title="Affichage détaillé de la fiche">
+                                </span>
+                            </a>
+                        </h4>
+                    </td>
+                    <td class="text-left" data="mot">
+                        <b>{{ record.mot }}</b>
+                    </td>
+                    <td class="text-center w1" data="creeLe">
+                        {{ record.creeLE|date('Y/m/d') }}
+                    </td>
+                    <td class="text-center" data="aApprendre">
+                        {% if record.aApprendre == FALSE %}
+                            <span class="glyphicon glyphicon-ok"></span>
+                        {% endif %}
+                    </td>
+                    <td class="text-left" data="typeMot">
+                        {{ record.typeMot is null ? '-' : record.typeMot }}
+                    </td>
+                    <td class="text-left" data="origine">
+                        {{ record.origine }}
+                    </td>
+                    <td class="text-left" data="signification">
+                        {{ record.signification }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.extraitLivre }}
+                    </td>
+                    <td class="text-left">
+                        {% if record.livre is null %}
+                            Pas dans bibliothèque
+                        {% else %}
+                            <b>{{ record.livre.titre }}</b>
+                            {% for auteur in record.livre.auteurs %}
+                                <br />{{ auteur.nom }}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td class="text-right">
+                        {{ record.page }}
+                    </td>
+
+                    <td class="text-left">
+                        {% for dico in record.trouveDansDicos %}
+                            {{ dico.nom }}<br />
+                        {% else %}
+                            -
+                        {% endfor %}
+                    </td>
+
+                    <td class="text-left">
+                        {% set nb = 0 %}
+                        {% if record.pasTrouveDansDicos|length > 0 %}
+                            {% for dico in record.pasTrouveDansDicos %}
+                                {% set nb = nb +1 %}
+                                {% if nb < 3 %}
+                                    {{ dico.nom|e }}<br />
+                                {% endif %}
+                            {% endfor %}
+                            + {{ record.pasTrouveDansDicos|length - 2 }} ....
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+
+    <!-- Modal for delete mot -->
+    <div class="modal fade" id="deleteMotModal" tabindex="-1" role="dialog" aria-labelledby="deleteMotModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    ATTENTION
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Doit-on vraiment supprimer le mot 
+                    <b data-replace="replace"></b> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-delete-mot">Oui</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for full screen mot -->
+    <div class="modal fade modal-lg" 
+         id="fullScreen" 
+         tabindex="-1" 
+         role="dialog" 
+         aria-labelledby="Visualisation plein écran" 
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Détail de </h4>
+                </div>
+                <div class="modal-body">
+                    Corps de la modale
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}    
+    {{parent()}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var row;
+            var idMot = 0;
+            var textMot = '';
+            var dte = '';
+
+            $('table').on('click', '.supprimer-mot', function (e) {
+                row = $(this).closest('tr');
+                idMot = row.attr('data-mot-id');  // Ok
+                textMot = row.attr('data-mot-text');// Ok
+                dte = getText('creeLe');
+                $('#deleteMotModal .modal-body b').append(textMot + ', créé le ' + inverseDate(dte));
+            });
+
+            $(document).on('click', '#btn-delete-mot', function () {
+                $.ajax({
+                    dataType: "json",
+                    method: "post",
+                    cache: false,
+                    url: "{{ path(route ~ '-delete') }}",
+                    data: {
+                        'id': idMot,
+                    },
+                    success: function (data) {
+                        $('#deleteMotModal').modal('hide');
+                        location.reload();
+                        return false;
+                    }
+                });
+                return false;
+            });
+
+            $("#dataTable").on('click', '.openFull', function (e) {
+                row = $(this).closest('tr');
+                $('#fullScreen .modal-header h4').append(getText('mot'));
+                $('#fullScreen .modal-body').append(getText('creeLe'));
+                $('#fullScreen .modal-body').append(etText('signification'));
+            });
+
+            $('#fullScreen').on('show.bs.modal', function (e) {
+
+
+                //console.log($('#fullScreen').find(".modal-header").append($('row["data"="mot"]')).html());
+
+        {#                    $('#fullScreen').find(".modal-header").append(row.html());#}
+
+
+                    /*
+                     if (!data) {
+                     alert('not data');
+                     return e.preventDefault(); // stops modal from being shown
+                     }
+                     */
+                    return true;
+                });
+
+                function getText(col) {
+                    return row.find("[data='" + col + "']").text();
+                }
+                function inverseDate(dte) {
+                    return dte.substr(8, 2) + '/' + dte.substr(5, 2) + "/" + dte.substr(0, 4);
+                }
+
+            });
+    </script>
+{% endblock %}

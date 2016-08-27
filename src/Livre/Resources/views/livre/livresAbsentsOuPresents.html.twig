@@ -1,0 +1,69 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{% set menu = 'liste' %}
+{% set route = 'livre' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ route }}</li>
+    <li>Livres à lire</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Liste des {{ nbRecords }} livres 
+        {{ ( tiwgFilter == 'présent' ) ? 'présents' : 'plus' }} dans ma bibliothèque
+    </h3>
+
+    <div class="table-responsive row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table id="dataTable" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="w1">MàJ</th>
+                        <th class="w8">Livres</th>
+                        <th class="w6">Auteur(s)</th>
+                        <th class="w6">Thème</th>
+                        <th class="w2">Dt Achat</th>
+                    </tr>
+                </thead>
+                {% for livre in records %}
+                    <tr>
+                        <td class="text-center">
+                            {% if livre.enStock == TRUE %}
+                                {% set mess = 'Signaler que je ne retrouve plus ce livre' %}
+                            {% else %}
+                                {% set mess = 'Marquer que que je viens de retrouver ce livre' %}
+                            {% endif %}
+                            <a href="{{ path(route ~ '-livre-update-col', {'id' : livre.id, 'col': 'enStock'} ) }}"
+                               title="{{ mess }}"
+                               alt="{{ mess }}" >
+                                <img width="100%" 
+                                     src="{{ baseRoutePrefix }}/img/modules/livre/etagerePleine.ico" />
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            {{ livre.titre }}
+                        </td>
+                        <td>
+                            {% for auteur in livre.auteurs %}
+                                {{ auteur.prenomNom }}<br />
+                            {% else %}
+                                -----
+                            {% endfor %}
+                        </td>
+                        <td class="text-left">
+                            {{ livre.theme }}
+                        </td>
+                        <td class="text-center">
+                            {{ livre.dateAchat|date('Y/m/d') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+{% endblock %}

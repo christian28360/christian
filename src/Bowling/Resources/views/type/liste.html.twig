@@ -1,0 +1,70 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Référentiels' %}
+{% set titre = 'type de jeu' %}
+{% set route = 'bowling-type' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Nb évènements</th>
+                    <th>Type</th>
+                    <th>Libellé</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr>
+                    <td class="text-center w1">
+                        <a href="{{ path(route ~ '-update', {'id' : record.id} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;
+                            </span>
+                        </a>
+                    </td>
+                    <td class="text-center w1"> {{ record.evenements.count|number_format(0, ',', ' ') }} </td>
+                    <td class="text-center w1">
+                        {{ record.typeJeu }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.libelle }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.creeLE is null or record.creeLE|date('Y') == '-0001') ? '-' : record.creeLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.modifieLE is null or record.modifieLE|date('Y') == '-0001') ? '-' : record.modifieLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        <a href="{{ path(route ~ '-delete', {'id' : record.id} ) }}"
+                           title="Supprimer l'enregistrement">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+
+{% endblock %}

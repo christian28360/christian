@@ -1,0 +1,46 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Reporting' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Courbe de tendance</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Courbe de tendance</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th class="text-center wAuto hgtAuto" >Séries</th>
+                        {% for key, record in records %}
+                        <td class="text-center wAuto rotate wAuto"
+                            data-date="{{ key }}"
+                            >
+                            {{ key|slice(0, 5) }}{{ key|slice(10, 3) }}
+                            </th>
+                        {% endfor %}
+                </tr>
+            </thead>
+            <tr>
+                <th class="text-center wauto" >Moyenne</th>
+                    {% for key, record in records %}
+                    <td class="text-center wAuto"
+                        data-moy="{{ record|number_format(1, ',', ' ') }}"
+                        >
+                        {{ record|number_format(1, ',', ' ') }}
+                    </td>
+                {% endfor %}
+            </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}    
+    {{parent()}}
+{% endblock %}

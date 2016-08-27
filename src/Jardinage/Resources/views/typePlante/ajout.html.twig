@@ -1,0 +1,25 @@
+{% extends "src/Jardinage/Resources/views/layout.html.twig" %}
+
+{%set menu = 'type de plante' %}
+{% set titre = 'type de plante' %}
+{% set route = 'type' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Ajout</li>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'app/Resources/views/fragments/titreMode.html.twig' with {'genre': 'm'} %}
+
+    {{ form_start(form, { 'attr': { 'role': 'form' }, 'method': 'post' }) }}
+
+    {{ form_errors(form) }}
+
+    {% include 'src/Jardinage/Resources/views/typePlante/formTypePlante.html.twig' %}
+
+    {{ form_end(form) }}
+
+{% endblock %}

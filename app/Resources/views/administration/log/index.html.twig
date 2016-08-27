@@ -1,0 +1,19 @@
+{% extends "app/Resources/views/layout-portail.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{%set menu = 'portail-si-admin-log' %}
+
+{% block content %}
+    <h3>Logs</h3>
+    
+    <ul class="list-group w5">
+    {% for file in files %}
+        {% if file.isFile %}
+            <li class="list-group-item"><a href='{{ path('portail-si-admin-log-download', { 'file' : file.getFilename()|url_encode }) }}'>{{ file.getFilename()  }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endblock %}

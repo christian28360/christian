@@ -1,0 +1,131 @@
+{% extends "app/Resources/views/administration/login/layout.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{% set menuApp = 'user' %}
+
+{% block content %}
+    <h3>Gestion des logins <small>utilisateurs</small></h3>
+
+    <a href="{{ path('portail-si-admin-login-create-user') }}" class="pull-right">Ajouter un utilisateur</a>
+
+    <div class="clearfix"></div>
+
+    <table id="users-table" class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-2">Login</th>
+                <th class="col-md-8">Identité</th>
+                <th class="col-md-2">
+                    <input type="text" id="filter" placeholder="Filtrer" class="form-control" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr data-login="{{ user.login }}" data-identity="{{ user.identity }}">
+                    <td><a href="{{ path('portail-si-admin-login-update-user', { 'user' : user.login }) }}">{{ user.login }}</a></td>
+                    <td>{{ user.identity }}</td>
+                    <td>
+                        <a href="#" data-url="{{ path('portail-si-admin-login-duplicate-user', { 'user' : user.login }) }}" data-toggle="modal" data-target="#popin-duplicate-user">dupliquer</a>
+                        / 
+                        <a href="#" data-url="{{ path('portail-si-admin-login-delete-user', { 'user' : user.login }) }}" data-toggle="modal" data-target="#popin-delete-user">supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan=3 class="text-center"><em>Aucun utilisateurs</em></td>
+                </tr>    
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="clearfix"></div>
+
+    <a href="{{ path('portail-si-admin-login-create-user') }}" class="pull-right">Ajouter un utilisateur</a>
+
+    <div class="modal fade" id="popin-duplicate-user" tabindex="-1" role="dialog" aria-labelledby="Êtes-vous certain de vouloir dupliquer cet utilisateur ?" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="" method="POST" class="form-inline" id="form-duplicate-user">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Êtes-vous certain de vouloir dupliquer cet utilisateur ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-inline">
+                            <div class="col-md-12">
+                                <label for="login-clone">Login :</label>
+                                <input type="text" id="login-clone" name="login-clone" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <input type="submit" value="Dupliquer" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="popin-delete-user" tabindex="-1" role="dialog" aria-labelledby="Êtes-vous certain de vouloir supprimer cet utilisateur ?" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Êtes-vous certain de vouloir supprimer cet utilisateur ?</h4>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous certain de vouloir supprimer cet utilisateur ?<br />
+                    <em><b>Attention</b> cette action est définitive</em>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" class="form-inline" id="form-delete-user">
+                        <input type="hidden" id="_method" name="_method" value="DELETE" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <input type="submit" value="Supprimer" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+
+            // Available filter
+            $(document).on("keyup", "#filter", function(e){
+                e.preventDefault();
+
+                if ($(this).val() == '') {
+                    $( "#users-table > tbody > tr" ).show();
+                    return false;
+                }
+
+                $( "#users-table > tbody > tr" ).hide();
+                $('#users-table > tbody > tr').filter(function() {
+                    var regex = new RegExp($('#filter').val(), "i");
+                    return String($(this).data('login')).match(regex) || String($(this).data('identity')).match(regex);
+                }).show();
+
+                return false;
+            });
+        
+            $('#popin-delete-user').on('show.bs.modal', function (e) {
+
+                $('#form-delete-user').get(0).setAttribute('action', $(e.relatedTarget).data('url'));
+            });
+
+            $('#popin-duplicate-user').on('show.bs.modal', function (e) {
+
+                $('#form-duplicate-user').get(0).setAttribute('action', $(e.relatedTarget).data('url'));
+            });
+        });
+    </script>
+{% endblock %}

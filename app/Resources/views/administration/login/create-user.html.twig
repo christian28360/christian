@@ -1,0 +1,26 @@
+{% extends "app/Resources/views/administration/login/layout.html.twig" %}
+
+{% block metaTitle %}
+    Administration Portail SI Véhicule
+{% endblock %}
+
+{% set menuApp = 'user' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        Création d'un utilisateur
+    </li>
+{% endblock %}
+
+{% block content %}
+    <h3>Gestion des logins <small>Création d'un utilisateur</small></h3>
+    
+    {{ form_start(form, { 'attr': { 'role': 'form' } }) }}
+
+    {{ form_errors(form) }}
+
+    {% include 'app/Resources/views/administration/login/fragments/user-form.html.twig' %}
+
+    {{ form_end(form) }}
+{% endblock %}

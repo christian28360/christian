@@ -1,0 +1,118 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Entrainements' %}
+{% set titre = 'carnet' %}
+{% set route = 'bowling-entrainement-carnet' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>
+        Consultation de{{ nbRecords > 0 ? 's' : ''}}  {{ records|length }} {{ titre }}{{ nbRecords > 0 ? 's' : ''}} 
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover compact">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Date achat</th>
+                    <th>Validité</th>
+                    <th>Prix</th>
+                    <th>Crédit<br />parties</th>
+                    <th>Parties<br />jouées</th>
+                    <th>Solde</th>
+                    <th>Commentaire</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carnet in records %}
+                    <tr>
+                        <td class="text-center w1">
+                            <a href="{{ path(route ~ '-update', {'id' : carnet.id} ) }}"
+                               title="Modifier l'enregistrement"
+                               alt="Modifier l'enregistrement" >
+                                <span class="glyphicon glyphicon-pencil">&nbsp;</span>
+                            </a>
+                        <td class="text-center">{{ carnet.dateAchat|date('d/m/Y') }}
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="#"
+                               title="Voir/ferrmer le détail des journées"
+                               alt="Voir/ferrmer le détail des journées"
+                               class="voirDetail">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>                        </td>
+                        </td>
+                        <td class="text-center w1">{{ carnet.dateFinValidite|date('d/m/Y') }}</td>
+                        <td class="text-right w1">{{ carnet.prix|format('2', ' ', '') }} €</td>
+                        <td class="text-right w1">{{ carnet.nbParties|format('2', ' ', '') }}</td>
+                        <td class="text-right w1">{{ carnet.nbPartiesJouees|format('2', ' ', '') }}</td>
+                        <td class="text-right w1">
+                            {{ (carnet.nbParties - carnet.nbPartiesJouees)|format('2', ' ', '') }}
+                        </td>
+                        <td class="text-left w1">{{ carnet.commentaire }}</td>
+                        <td class="text-center w1">{{ carnet.creeLE|date('d/m/Y') }}</td>
+                        <td class="text-center w1">{{ carnet.modifieLE|date('d/m/Y') }}</td>
+                        <td class="text-center w1">
+                            <a href="{{ path(route ~ '-delete', {'id' : carnet.id} ) }}"
+                               title="Supprimer l'enregistrement">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {# Détail des journées #}
+                    <tr 
+                        id="{{ carnet.id }}"
+                        class="hidden"
+                        >
+                        <td colspan="1" class="text-right"></td>
+                        <td colspan="2" >
+                            <table class="table table-bordered table-hover compact">
+                                <thead>
+                                    <tr>
+                                        <th>Date entrainement</th>
+                                        <th>Nb parties</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for serie in carnet.series %}
+                                        <tr>
+                                            <td class="text-center">{{ serie.dateSerie|date('d/m/Y') }}</td>
+                                            <td class="text-right">{{ serie[1]}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+{% endblock %}
+
+{% block javascripts %}    
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", ".voirDetail", function (e) {
+                e.preventDefault();
+                $(this).parents('tr').next('tr').toggleClass('hidden');
+                return false;
+            });
+
+        });
+    </script>
+{% endblock %}

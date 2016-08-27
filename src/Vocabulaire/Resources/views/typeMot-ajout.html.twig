@@ -1,0 +1,35 @@
+{% extends "src/Vocabulaire/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Typologie' %}
+{% set titre = 'Type de mot' %}
+{% set route = 'vocabulaire-typeMot' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Ajout</li>
+    {% endblock %}
+
+{% block content %}
+
+    {% include 'app/Resources/views/fragments/titreMode.html.twig' with {'genre': 'm'} %}
+
+    {{ form_start(form, { 'attr': { 'role': 'form' }, 'method': 'post' }) }}
+
+    {{ form_errors(form) }}
+
+    {% include 'src/Vocabulaire/Resources/views/typeMot-form.html.twig' %}
+
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}    
+    {{parent()}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Focus sur le premier champ d'input
+            $("input:first").focus();
+        });
+    </script>
+{% endblock %}

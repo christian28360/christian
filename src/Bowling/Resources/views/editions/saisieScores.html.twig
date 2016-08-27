@@ -1,0 +1,54 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Editions' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Feuille de saisie des scores</li>
+    {% endblock %}
+
+{% block content %}
+    <h3 class="hidden-print">Edition de la feuille de saisie des {{ menu }}</h3>
+
+    <div class="row-border">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 list-group">
+            {% for i in 1 .. 6 %}
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-1">Partie</th>
+                            <th class="col-lg-1">Hand.</th>
+                            <th class="col-lg-1">Gagn.</th>
+                            <th class="col-lg-1">Score</th>
+                            <th class="col-lg-1">X</th>
+                            <th class="col-lg-1">/</th>
+                            <th class="col-lg-1">I I</th>
+                        </tr>
+                        <tr>
+                            <th  colspan="7">
+                                L - T - E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+                                à ......................
+                                Journéée du
+                                .. / .. /{{ "now"|date('Y') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for i in 1 .. 4 %}
+                        <tr>
+                            <td class="text-center"><b>{{ i }}</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

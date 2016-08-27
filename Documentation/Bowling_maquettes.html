@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.0.2.2 (Windows)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2015-11-07T18:33:00.451000000"/>
+	<style type="text/css">
+		@page { margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 120% }
+		pre.cjk { font-family: "NSimSun", monospace }
+		h3.western { font-family: "Arial", sans-serif; font-size: 14pt }
+		h3.cjk { font-family: "Microsoft YaHei"; font-size: 14pt }
+		h3.ctl { font-family: "Lucida Sans"; font-size: 14pt }
+		td p { margin-bottom: 0cm }
+		th p { margin-bottom: 0cm }
+		code.cjk { font-family: "NSimSun", monospace }
+	</style>
+</head>
+<body lang="fr-FR" dir="ltr">
+<h3 class="western">11.2.1 Integer Types (Exact Value) - INTEGER,
+INT, SMALLINT, TINYINT, MEDIUMINT, BIGINT</h3>
+<p>MySQL supports the SQL standard integer types <code class="western">INTEGER</code>
+(or <code class="western">INT</code>) and <code class="western">SMALLINT</code>.
+As an extension to the standard, MySQL also supports the integer
+types <code class="western">TINYINT</code>, <code class="western">MEDIUMINT</code>,
+and <code class="western">BIGINT</code>. The following table shows
+the required storage and range for each integer type. 
+</p>
+<table width="736" cellpadding="5" cellspacing="1" style="page-break-before: auto; page-break-after: auto; page-break-inside: auto">
+	<col width="120">
+	<col width="45">
+	<col width="268">
+	<col width="257">
+	<thead>
+		<tr>
+			<th width="120" bgcolor="#ffcc99" style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><b>Type</b></p>
+			</th>
+			<th width="45" bgcolor="#ffcc99" style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center">Storage</p>
+			</th>
+			<th width="268" bgcolor="#ffcc99" style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p>Minimum Value</p>
+			</th>
+			<th width="257" bgcolor="#ffcc99" style="border: 1px double #808080; padding: 0.1cm">
+				<p>Maximum Value</p>
+			</th>
+		</tr>
+		<tr>
+			<th width="120" bgcolor="#ffcc99" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm"></th>
+			<th width="45" bgcolor="#ffcc99" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center">(Bytes)</p>
+			</th>
+			<th width="268" bgcolor="#ffcc99" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p>(Signed/Unsigned)</p>
+			</th>
+			<th width="257" bgcolor="#ffcc99" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p>(Signed/Unsigned)</p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td rowspan="2" width="120" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: 1.00pt solid #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p align="center"><code class="western"><b>TINYINT</b></code></p>
+			</td>
+			<td rowspan="2" width="45" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: 1.00pt solid #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p align="center">1</p>
+			</td>
+			<td width="268" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">-128</code></p>
+			</td>
+			<td width="257" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">127</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td width="268" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">0</code></p>
+			</td>
+			<td width="257" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">255</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" width="120" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western"><b>SMALLINT</b></code></p>
+			</td>
+			<td rowspan="2" width="45" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: 1.00pt solid #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p align="center">2</p>
+			</td>
+			<td width="268" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">-32768</code></p>
+			</td>
+			<td width="257" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">32767</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td width="268" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">0</code></p>
+			</td>
+			<td width="257" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">65535</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" width="120" bgcolor="#e6e6ff" style="border: 1.00pt solid #000000; padding: 0.1cm">
+				<p align="center"><code class="western"><b>MEDIUMINT</b></code></p>
+			</td>
+			<td rowspan="2" width="45" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: 1.00pt solid #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p align="center">3</p>
+			</td>
+			<td width="268" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">-8388608</code></p>
+			</td>
+			<td width="257" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">8388607</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td width="268" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">0</code></p>
+			</td>
+			<td width="257" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">16777215</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" width="120" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western"><b>INT</b></code></p>
+			</td>
+			<td rowspan="2" width="45" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: 1.00pt solid #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p align="center">4</p>
+			</td>
+			<td width="268" style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">-2147483648</code></p>
+			</td>
+			<td width="257" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">2147483647</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td width="268" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">0</code></p>
+			</td>
+			<td width="257" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">4294967295</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2" width="120" bgcolor="#e6e6ff" style="border: 1.00pt solid #000000; padding: 0.1cm">
+				<p align="center"><code class="western"><b>BIGINT</b></code></p>
+			</td>
+			<td rowspan="2" width="45" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: 1.00pt solid #808080; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+				<p align="center">8</p>
+			</td>
+			<td width="268" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">-9223372036854775808</code></p>
+			</td>
+			<td width="257" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1px double #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">9223372036854775807</code></p>
+			</td>
+		</tr>
+		<tr>
+			<td width="268" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">0</code></p>
+			</td>
+			<td width="257" bgcolor="#e6e6ff" style="border-top: none; border-bottom: 1.00pt solid #808080; border-left: 1.00pt solid #808080; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+				<p align="center"><code class="western">18446744073709551615</code></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<pre class="western"></pre>
+</body>
+</html>

@@ -1,0 +1,132 @@
+{%set menu = 'reserver' %}
+
+{% extends "src/GestionReservationAuto/Resources/views/layout.html.twig" %}
+
+{% block content %}
+    <h3>Créer une réservation</h3>
+
+    {{ form_start(form, { 'attr': { 'role': 'form', 'class': 'form-horizontal' }, 'method': 'post' }) }}
+    {{ form_errors(form) }}
+    {% include 'src/GestionReservationAuto/Resources/views/reservation/fragments/form.html.twig' %}  
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}    
+    {{parent()}}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#Reservation_voiture").empty();
+            $("#Reservation_user").empty();
+            var datepickers = $('.datepicker-widget').datepicker({
+                todayBtn: "linked",
+                orientation: "top auto",
+                calendarWeeks: true,
+                language: "fr",
+                daysOfWeekHighlighted: "0,6",
+                multidate: false,
+                daysOfWeekDisabled: "0,6",
+                autoclose: true,
+                todayHighlight: true,
+            });
+
+            $(".datepicker-widget").change(function () {
+                rechercheVehicule();
+            });
+
+            function rechercheVehicule() {
+                // voir si on a saisi les 2 dates
+                var saisDate = !($("input[name*='dateDebut']").val() === '' || $("input[name*='dateFin']").val() === '');
+                if (saisDate) {
+                    loadVehicle();
+
+                    return false;
+                }
+                return false;
+            }
+            ;
+
+            /*
+             * 
+             $('.datepicker-widget').change(function () {
+             alert('perte focus datepicker');
+             };
+             */
+
+            /*
+             * reste à faire : mettre en place les exclusions de dates à partir du modèle ci-dessous :
+             * 
+             var nowTemp = new Date(); 
+             var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+             
+             var checkin = $('#dpd1').datepicker({
+             onRender: function (date) {
+             return date.valueOf() < now.valueOf() ? 'disabled' : '';
+             }
+             }).on('changeDate', function (ev) {
+             if (ev.date.valueOf() > checkout.date.valueOf()) {
+             var newDate = new Date(ev.date)
+             newDate.setDate(newDate.getDate() + 1);
+             checkout.setValue(newDate);
+             }
+             checkin.hide();
+             $('#dpd2')[0].focus();
+             }).data('datepicker');
+             var checkout = $('#dpd2').datepicker({
+             onRender: function (date) {
+             return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+             }
+             }).on('changeDate', function (ev) {
+             checkout.hide();
+             }).data('datepicker');
+             */
+
+            /*
+             $('.datepicker-widget').datepicker({
+             todayBtn: true,
+             language: "fr",
+             multidate: false,
+             daysOfWeekDisabled: "0,6",
+             autoclose: true,
+             todayHighlight: true
+             }).on('changeDate', function (e) {
+             loadVehicle();
+             });
+             */
+
+            function loadVehicle()
+            {
+                var form_data = $("form").serialize();
+
+                //envoi au controller
+                $.ajax({
+                    url: "findVoiture",
+                    async: false,
+                    type: 'POST',
+                    data: form_data,
+                    success: function (data)
+                    {
+                        var dataVoitures = data.voitures;
+                        //vider les selects
+                        $("#Reservation_voiture").empty();
+                        $("#Reservation_user").empty();
+                        $.each(dataVoitures, function (key, val) {
+                            $('#Reservation_voiture')
+                                    .append($("<option></option>")
+                                            .attr("value", val.idVoiture).text(
+                                            val.vehicule.vehImmat
+                                            + ' '
+                                            + val.vehicule.mdlLibelle
+                                            + ' '
+                                            + val.commentaire
+                                            ));
+                        });
+                    }
+                });
+            }
+
+        });
+    </script>
+{% endblock %}

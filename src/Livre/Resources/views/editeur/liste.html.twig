@@ -1,0 +1,64 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{% set menu = 'editeur' %}
+{% set route = 'editeur' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} éditeurs
+        <small>
+            {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Nb livres</th>
+                    <th>Nom</th>
+                    <th>Remarques</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            {% for editeur in records %}
+                <tr>
+                    <td class="text-center w1">
+                        <a href="{{ path('livre-' ~ route ~ '-update', {'id' : editeur.id} ) }} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;
+                            </span>
+                        </a>
+                    </td>
+                    <td class="text-center w1">{{ editeur.livres.count }}</td>
+                    <td class="text-left">{{ editeur.nom }}</td>
+                    <td class="text-left">{{ editeur.remarques }}</td>
+                    <td class="text-center">
+                        {{ (editeur.creeLE is null or editeur.creeLE|date('Y') == '-0001') ? '-' : editeur.creeLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center">
+                        {{ (editeur.modifieLE is null or editeur.modifieLE|date('Y') == '-0001') ? '-' : editeur.modifieLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        <a href="{{ path('livre-' ~ route ~ '-delete', {'id' : editeur.id} ) }}"
+                           title="Supprimer l'enregistrement">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+
+{% endblock %}

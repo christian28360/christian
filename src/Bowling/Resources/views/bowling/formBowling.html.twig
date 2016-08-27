@@ -1,0 +1,72 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.alias) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.commentaire) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.adrNo) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.adrRue) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.adr1) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.adr2) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.adr3) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.adrCp) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.ville) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.pays) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.telephone1) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.telephone2) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-3 text-right">
+            {{ form_row(form.mail) }}
+        </div>
+        <div class="form-group col-md-4 text-right">
+            {{ form_row(form.siteWeb) }}
+        </div>
+    </div>
+
+    <div class="col-md-3 form form-inline text-right">
+        {{ form_row(form.annuler) }}
+        {{ form_row(form.save) }}
+        <a href="{{ path('bowling-bowling') }}">{{ form_row(form.quitter) }}</a>
+    </div>
+
+</div>

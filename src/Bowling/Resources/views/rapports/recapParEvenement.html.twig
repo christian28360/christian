@@ -1,0 +1,63 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Reporting' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Récaptitulatif/évènement</li>
+    {% endblock %}
+
+{% block content %}
+    <div class="table-responsive row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table table-bordered table-hover">
+                <caption><h4>Récaptitulatif par évènement</h4></caption>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Evènement</th>
+                        <th rowspan="2">Nb<br />Parties</th>
+                        <th colspan="2">Scores</th>
+                        <th colspan="2">Strikes</th>
+                        <th colspan="2">Spares</th>
+                        <th colspan="2">X & /</th>
+                    </tr>
+                    <tr>
+                        {% for i in 0 .. 3 %}
+                            <th>Total</th>
+                            <th>Moyenne</th>
+                            {% endfor %}
+                    </tr>
+                </thead>
+                {% for key, record in records %}
+                    <tr {% if key == 'G' %}class="table-ligne-total"{% endif %}>
+                        <td class="text-right w1 separ-droite">
+                            {% if     key == 'G' %}Total
+                            {% elseif key == 'L' %}Ligue
+                            {% elseif key == 'C' %}Championat
+                            {% elseif key == 'T' %}Tournoi
+                            {% elseif key == 'E' %}Entrainement
+                            {% elseif key == 'A' %}Autre
+                            {% else %}Erreur
+                            {% endif %}
+                        </td>
+                        {% for i in 0 .. 4 %}
+                            <td class="text-right w1">
+                                {{ record[i]|number_format(0, ',', ' ') }}
+                            </td>
+                            {% if i > 0 %}
+                                <td class="text-right w1">
+                                    {{ i == 1 ? '<b>' }}
+                                    {{ record[0] == 0 ? '-' : (record[i] / record[0])|number_format(2, ',', ' ') }}
+                                    {{ i == 1 ? '</b>' }}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

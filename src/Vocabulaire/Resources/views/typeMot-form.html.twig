@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="form-group">
+        {{ form_label(form.typeMot) }}
+        {{ form_errors(form.typeMot) }}
+        {{ form_widget(form.typeMot, { 'attr': { 'class': 'form-control' } }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.sousTypeMot) }}
+        {{ form_errors(form.sousTypeMot) }}
+        {{ form_widget(form.sousTypeMot, { 'attr': { 'class': 'form-control' } }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.sousSousTypeMot) }}
+        {{ form_errors(form.sousSousTypeMot) }}
+        {{ form_widget(form.sousSousTypeMot, { 'attr': { 'class': 'form-control' } }) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.libelle) }}
+        {{ form_errors(form.libelle) }}
+        {{ form_widget(form.libelle, { 'attr': { 'class': 'form-control' } }) }}
+    </div>
+
+    <div class="col-md-3 form form-inline text-right">
+        {{ form_row(form.annuler) }}
+        {{ form_row(form.save) }}
+        <a href="{{ path('vocabulaire-typeMot-liste') }}">{{ form_row(form.quitter) }}</a>
+    </div>
+
+</div>

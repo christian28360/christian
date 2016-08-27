@@ -1,0 +1,550 @@
+/* 
+    Created on : 30/12/2014
+    Author     : ezs824 (C.A.)
+*/
+@media print {
+    @page {
+        size:   landscape;
+        margin: 0.5cm;
+    }
+
+    html {
+        font-size: 80% !important;
+    }
+
+    .breadcrumb {
+        display:    none !important;
+    }
+
+    header {
+        display:    none !important;
+    }
+
+    .container {
+        border: 1px solid black;
+    }
+} 
+/*    fin du média print  */
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font: 0.7em/1em Verdana, Arial, sans-serif;
+    background-color: #FFF;
+}
+
+/* surcharge du css bootstrap pour fil d'arianne*/
+@media (max-width: 992px) {
+    .breadcrumb {
+        display: none;
+    }
+}
+
+.breadcrumb {
+    background-color: #858378;
+    color: #FFF;
+    border-radius: 0px;
+    padding: 2px 15px;
+    margin-bottom: 10px;
+}
+
+.breadcrumb > li > a {
+    color: #FFF;
+}
+
+.breadcrumb > li+li:before {
+    content: ">";
+}
+
+.breadcrumb > li.last {
+    float: right;
+}
+
+.breadcrumb > li+li.last:before {
+    content: " ";
+}
+
+/* fin surcharge du css bootstrap */
+
+/*
+ * Gestion du header
+ *****************************************************************************/
+.page-header {
+    margin: 0;
+}
+
+#logoHomepage {
+    text-decoration: none;
+    color: #0F5390;
+}
+
+h1 {
+    font-family: 'Trebuchet MS';
+    font-weight: bold;
+    text-decoration: none;
+    color: #0F5390;
+    line-height: 0.9em;
+    font-size: 2.68em;
+    margin: 15px 0px 0px 0px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.34em;
+    color: #0F5390;
+    letter-spacing: -1px;
+    margin: 5px 0px 0px 0px;
+}
+
+header h2 > small {
+    margin-left: 20px;
+    letter-spacing: 0;
+    font-size: 85%;
+}
+
+h3 {
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: 2.3em;
+    font-weight: normal;
+    color: #826041;
+    margin-bottom: 25px;
+    line-height: 1em;
+}
+
+h4 {
+    color: #826041;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    line-height: 1em;
+}
+/*****************************************************************************/
+
+/*
+ * navigation
+ **********************************************************************/
+nav.navbar:before {
+    clear: both;
+}
+
+nav.navbar {
+    margin:         20px 0px;
+    border-radius:  0px;
+    border:         none;
+    border-bottom:  1px solid #0F5390;
+}
+
+nav.navbar-nav li > a {
+    padding-top:    4px;
+    padding-bottom: 4px;    
+    color:              #0F5390;
+    color:              red;
+    background-color:   red;
+
+}
+navbar-nav li > a {
+    line-height:    600px;
+    padding-bottom: 4px;
+    padding-top:    4px;
+}
+
+nav.navbar-default {
+    background-color:   transparent;
+}
+
+.navbar .navbar-collapse {
+    padding-left:   0px;
+    padding-right:  0px;
+}
+
+.dropdown-menu {
+    font-size: 11px;
+}
+
+.page-header {
+    border-bottom: 0px solid #000;
+}
+
+@media (min-width: 768px) {
+    .navbar-collapse .navbar-nav.navbar-left:first-child {
+        margin-left: 0;
+    }
+    .navbar-collapse .navbar-nav.navbar-right:last-child {
+        margin-right: 0;
+    }
+}
+/**********************************************************************/
+
+/*
+ * Global form style
+ **********************************************************************/
+.alert > ul {
+    list-style-type: none;
+}
+
+.btn {
+    font-size: inherit;
+}
+
+.dtc-loader {
+    background-image: url("../../img/common/ajax-loader.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 66px;
+    height: 66px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dtc-input-loader {
+    background: url("../../img/common/ajax-loader.gif") no-repeat right 5px center;
+    background-size: 24px 24px;
+}
+/**********************************************************************/
+
+/*
+ * Global width style
+ **********************************************************************/
+.w12 {
+    width: 100%;
+}
+.w11 {
+    width: 91.66666666666666%;
+}
+.w10 {
+    width: 83.33333333333334%;
+}
+.w9 {
+    width: 75%;
+}
+.w8 {
+    width: 66.66666666666666%;
+}
+.w7 {
+    width: 58.333333333333336%;
+}
+.w6 {
+    width: 50%;
+}
+.w5 {
+    width: 41.66666666666667%;
+}
+.w4 {
+    width: 33.33333333333333%;
+}
+.w3 {
+    width: 25%;
+}
+.w2 {
+    width: 16.666666666666664%;
+}
+.w1 {
+    width: 8.333333333333332%;
+}
+.wAuto {
+    width: auto;
+}
+.hgtAuto {
+    height: auto;
+}
+.hgt5 {
+    height: 5px;
+}
+.hgt10 {
+    height: 10px;
+}
+.hgt15 {
+    height: 15px;
+}
+.hgt20 {
+    height: 20px;
+}
+.hgt400 {
+    height: 400px;
+}
+th {
+}
+
+/* charte graphique portail Christian sur tableaux
+ **************************************************************/
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th
+{
+    text-align: center;
+    vertical-align: middle;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    color: #FFFFFF;
+    background-color: #7CC3E7;
+}
+
+/* scrolling sur tableaux
+ **************************************************************/
+.table.scroll {
+
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 4px 8px;
+    vertical-align: middle;
+}
+
+/* cellules fond bleu
+ **************************************************************/
+.table > thead > tr > td.blue,
+.table > tbody > tr > td.blue,
+.table > tfoot > tr > td.blue,
+.table > thead > tr > th.blue,
+.table > tbody > tr > th.blue,
+.table > tfoot > tr > th.blue,
+.table > thead > tr.blue > td,
+.table > tbody > tr.blue > td,
+.table > tfoot > tr.blue > td,
+.table > thead > tr.blue > th,
+.table > tbody > tr.blue > th,
+.table > tfoot > tr.blue > th {
+    background-color: #d3eaf6;
+}
+/* Ajout des couleurs au survol de la ligne uniquement
+ **************************************************************/
+.table-hover > tbody > tr:hover > th.blue,
+.table-hover > tbody > tr:hover > td.blue,
+.table-hover > tbody > tr > td.blue:hover,
+.table-hover > tbody > tr > th.blue:hover,
+.table-hover > tbody > tr.blue:hover > td,
+.table-hover > tbody > tr.blue:hover > th {
+    background-color: #c4e4f4;
+}
+
+/* cellules fond jaune
+ **************************************************************/
+.table > thead > tr > td.yellow,
+.table > tbody > tr > td.yellow,
+.table > tfoot > tr > td.yellow,
+.table > thead > tr > th.yellow,
+.table > tbody > tr > th.yellow,
+.table > tfoot > tr > th.yellow,
+.table > thead > tr.yellow > td,
+.table > tbody > tr.yellow > td,
+.table > tfoot > tr.yellow > td,
+.table > thead > tr.yellow > th,
+.table > tbody > tr.yellow > th,
+.table > tfoot > tr.yellow > th {
+    background-color: #f9f6d8;
+}
+
+/* Ajout des couleurs au survol de la ligne uniquement
+ **************************************************************/
+.table-hover > tbody > tr > td.yellow:hover,
+.table-hover > tbody > tr > th.yellow:hover,
+.table-hover > tbody > tr.yellow:hover > td,
+.table-hover > tbody > tr.yellow:hover > th,
+.table-hover > tbody > tr:hover > th.yellow,
+.table-hover > tbody > tr:hover > td.yellow {
+    background-color: #f6f1bf;
+}
+
+/* cellules modifiées, fond rose
+ **************************************************************/
+.table > thead > tr > td.danger,
+.table > tbody > tr > td.danger,
+.table > tfoot > tr > td.danger,
+.table > thead > tr > th.danger,
+.table > tbody > tr > th.danger,
+.table > tfoot > tr > th.danger,
+.table > thead > tr.danger > td,
+.table > tbody > tr.danger > td,
+.table > tfoot > tr.danger > td,
+.table > thead > tr.danger > th,
+.table > tbody > tr.danger > th,
+.table > tfoot > tr.danger > th {
+    background-color: #F3C9F3;
+}
+
+/* Ajout des couleurs au survol de la ligne uniquement
+ **************************************************************/
+.table-hover > tbody > tr > td.danger:hover,
+.table-hover > tbody > tr > th.danger:hover,
+.table-hover > tbody > tr.danger:hover > td,
+.table-hover > tbody > tr.danger:hover > th,
+.table-hover > tbody > tr:hover > th.danger,
+.table-hover > tbody > tr:hover > td.danger {
+    background-color: #E3B8E3;
+}
+
+/* cellules masquées, bas de tableaux, totaux
+ **************************************************************/
+.table > thead > tr > th.invisible,
+.table > tbody > tr > th.invisible,
+.table > tfoot > tr > th.invisible,
+.table > thead > tr > td.invisible,
+.table > tbody > tr > td.invisible,
+.table > tfoot > tr > td.invisible,
+.table > thead > tr.invisible > th,
+.table > tbody > tr.invisible > th,
+.table > tfoot > tr.invisible > th,
+.table > thead > tr.invisible > td,
+.table > tbody > tr.invisible > td,
+.table > tfoot > tr.invisible > td {
+    border:             none;
+    background-color:   transparent;
+}
+
+/*
+ * Spécifique au simulateur et ses larges tableaux
+ ******************************************************************************/
+.table-responsive {
+    width: 100%;
+    overflow: auto;
+    margin-bottom: 15px;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+}
+.table-responsive > .table {
+    margin-bottom: 0;
+}
+.table-responsive > .table > thead > tr > th,
+.table-responsive > .table > tbody > tr > th,
+.table-responsive > .table > tfoot > tr > th,
+.table-responsive > .table > thead > tr > td,
+.table-responsive > .table > tbody > tr > td,
+.table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+}
+.table-responsive > .table-bordered {
+    border: 0;
+}
+.table-responsive > .table-bordered > thead > tr > th:first-child,
+.table-responsive > .table-bordered > tbody > tr > th:first-child,
+.table-responsive > .table-bordered > tfoot > tr > th:first-child,
+.table-responsive > .table-bordered > thead > tr > td:first-child,
+.table-responsive > .table-bordered > tbody > tr > td:first-child,
+.table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0;
+}
+.table-responsive > .table-bordered > thead > tr > th:last-child,
+.table-responsive > .table-bordered > tbody > tr > th:last-child,
+.table-responsive > .table-bordered > tfoot > tr > th:last-child,
+.table-responsive > .table-bordered > thead > tr > td:last-child,
+.table-responsive > .table-bordered > tbody > tr > td:last-child,
+.table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0;
+}
+.table-responsive > .table-bordered > tbody > tr:last-child > th,
+.table-responsive > .table-bordered > tfoot > tr:last-child > th,
+.table-responsive > .table-bordered > tbody > tr:last-child > td,
+.table-responsive > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0;
+}
+
+/*
+    trait au dessus d'une ligne total ( à mettre sur le <tr> )
+ou
+    séparateur de groupe sur le tr
+ **************************************************************/
+.next,
+.table-ligne-total {
+    border-top: 2px solid #7CC3E7;
+}
+/* séparateur gauche de groupe & droite
+ **************************************/
+.separ-gauche {
+    border-left: 2px solid #7CC3E7 !important;
+}
+.separ-droite {
+    border-right: 2px solid #7CC3E7 !important;
+}
+/*
+* Modification du style des onglets
+******************************************************************************/
+.nav-tabs.nav-justified {
+    margin-bottom: 10px;
+}
+
+.nav-tabs.nav-justified> li > a {
+    height: 60px;
+}
+
+@media (min-width: 768px) {
+    .nav-tabs.nav-justified > li {
+        display: block;
+        width: 100%;
+    }
+    .nav-tabs.nav-justified > li > a {
+        margin-bottom: 5px;
+        border-bottom: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-tabs.nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+    .nav-tabs.nav-justified > li > a {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-tabs.nav-justified > li > a {
+        margin-right: 0;
+        border-radius: 4px;
+    }
+    .nav-tabs.nav-justified > .active > a,
+    .nav-tabs.nav-justified > .active > a:hover,
+    .nav-tabs.nav-justified > .active > a:focus {
+        border: 1px solid #ddd;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-tabs.nav-justified > li > a {
+        border-bottom: 1px solid #dddddd;
+        border-radius: 4px 4px 0 0;
+    }
+    .nav-tabs.nav-justified > .active > a,
+    .nav-tabs.nav-justified > .active > a:hover,
+    .nav-tabs.nav-justified > .active > a:focus {
+        border-bottom-color: #ffffff;
+    }
+}
+
+/******************************************************************************/
+
+/* réduire la hauteur des lignes */
+.compact > tbody > tr > td,
+.compact > tbody > tr > th{
+    padding: 0px 6px;
+}
+.compact > thead > tr > th{
+    padding: 2px 6px;
+}
+
+/* coins arrondis */
+.coinsArrondis {
+    border:                 2px solid #9FC6FF;
+    padding:                7px;
+    /*arrondir les coins en haut à gauche et en bas à droite*/
+    -moz-border-radius:     15px;
+    -webkit-border-radius:  15px;
+    border-radius:          15px;
+}
+.bleu {
+    background-color:       #d9edf7;
+}
+.rose {
+    background-color:       #f2dede;
+}
+.vert {
+    background-color:       #dff0d8;
+}

@@ -1,0 +1,36 @@
+{% set layout = 'src/' ~ route ~ '/Resources/views/layout.html.twig' %}
+{% extends layout %}
+
+{% set menu = 'Sauvegardes' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Sauvegarde des objets utilisés en base de données pour {{ application }}</h3>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Messages de la sauvegarde</th>
+                        </tr>
+                    </thead>
+                    {% for Txt in messages%}
+                        <tr>
+                            <td class="text-left">
+                                {{ Txt|raw }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

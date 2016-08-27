@@ -1,0 +1,67 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'stats' %}
+{% set route = 'score' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Ventilation/tranche</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Ventilation par tranche</h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Strikes</th>
+                    <th>Spares</th>
+                    <th>Evènement</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <td class="text-center w1"> {{ record.datePartie|date('D d/m/Y') }}</td>
+                <td class="text-center w1"> {{ record.score }}</td>
+                <td class="text-center w1"> {{ record.strike }}</td>
+                <td class="text-center w1"> {{ record.spare }}</td>
+                <td class="text-center w1"> {{ record.split }}</td>
+                <tr>
+                    <td class="text-left">
+                        {{ record.evenement.typeJeu.libelle is null ? '--' : record.evenement.typeJeu.libelle }}, 
+                        {{ record.evenement.bowling is null ? '--' : record.evenement.bowling.nom }}, 
+                        {{ record.evenement.typeJeu is null ? '--' : record.evenement.typeJeu.typeJeu }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'src/Bowling/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+
+    <div class="modal fade" id="ajout-bowling" tabindex="-1" role="dialog" aria-labelledby="Recherche d'un véhicule à rajouter dans le parc du site" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="error-update" tabindex="-1" role="dialog" aria-labelledby="Une erreur est survenue" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Une erreur est survenue</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

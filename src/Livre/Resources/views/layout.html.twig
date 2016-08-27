@@ -1,0 +1,42 @@
+{% extends "app/Resources/views/layout.html.twig" %}
+
+{% block metaTitle %}Gestion bibliothèque personnelle{% endblock %}
+{% block title %}Gestion bibliothèque personnelle{% endblock %}
+
+{% block headerPicture %}
+    <img src="{{ baseRoutePrefix }}/img/modules/livre/etagerePleine.ico" />
+    {{ parent() }}
+{% endblock %}
+
+{#{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ baseRoutePrefix }}/css/modules/livre/global.css" rel="stylesheet" />
+    <link href="{{ baseRoutePrefix }}/css/modules/livre/detail.css" rel="stylesheet" />
+{% endblock %}
+#}
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path('homepage') }}">Portail</a></li>
+    <li><a href="{{ path('livre-homepage') }}">Accueil</a></li>
+    {% endblock %}
+
+{% block menu %}
+    {% include 'src/Livre/Resources/views/fragments/menu.html.twig' with {'menu': menu } %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('tr').on('.editable-click', function (e) {
+                alert('doubleclick');
+            })
+        });
+
+
+    </script> 
+{% endblock %}

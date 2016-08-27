@@ -1,0 +1,38 @@
+#
+# DOCTRINE
+################################################################################
+doctrine:
+    orm:
+        configuration:
+            orm.ems.options:
+                christian:
+                    connection: christian
+#                    query_cache: apc
+#                    metadata_cache: apc
+                    mappings:
+                        couverture:
+                            type: annotation
+                            namespace: CHRIST\Modules\Livre\Entity\Couverture
+                            path: %parameters_path_rootModules%Livre/Entity
+                            use_simple_annotation_reader: false
+                        ecrivain:
+                            type: annotation
+                            namespace: CHRIST\Modules\Livre\Entity\Ecrivain
+                            path: %parameters_path_rootModules%Livre/Entity
+                            use_simple_annotation_reader: false
+                        editeur:
+                            type: annotation
+                            namespace: CHRIST\Modules\Livre\Entity\Editeur
+                            path: %parameters_path_rootModules%Livre/Entity
+                            use_simple_annotation_reader: false
+                        livre:
+                            type: annotation
+                            namespace: CHRIST\Modules\Livre\Entity\Livre
+                            path: %parameters_path_rootModules%Livre/Entity
+                            use_simple_annotation_reader: false
+                        theme:
+                            type: annotation
+                            namespace: CHRIST\Modules\Livre\Entity\Theme
+                            path: %parameters_path_rootModules%Livre/Entity
+                            use_simple_annotation_reader: false
+################################################################################

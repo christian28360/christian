@@ -1,0 +1,59 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{%set menu = 'homepage' %}
+{% set route = 'livre' %}
+
+{% block metaTitle %}Gestion bibliothèque personnelle{% endblock %}
+{% block title %}Gestion bibliothèque personnelle{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+
+    <div class="text-center">
+        <h1>Répartition par catégorie</h1>
+        <h1>&nbsp;</h1>
+        <h2>
+            {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {menu: 'livre', 'genre': 'm'} %}
+        </h2>
+        <br />
+
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2 list-group">
+                <span class="list-group-item active">
+                    Données
+                </span>
+
+                <span class="list-group-item text-left">
+                    <span class="glyphicon glyphicon-book">&nbsp;</span>
+                    <span class="text-primary"><a href="{{ path('livre-livre') }}">Livres</a></span>
+                    <span class="badge">{{ livres }}</span>
+                </span>
+
+                <span class="list-group-item text-left">
+                    <span class="glyphicon glyphicon-user">&nbsp;</span>
+                    <span class="text-primary"><a href="{{ path('livre-ecrivain') }}">Ecrivains</a></span>
+                    <span class="badge">{{ ecrivains }}</span>
+                </span>
+
+                <span class="list-group-item text-left">
+                    <span class="glyphicon glyphicon-briefcase">&nbsp;</span>
+                    <span class="text-primary"><a href="{{ path('livre-editeur') }}">Editeurs</a></span>
+                    <span class="badge">{{ editeurs }}</span>
+                </span>
+
+                <span class="list-group-item text-left">
+                    <span class="glyphicon glyphicon-comment">&nbsp;</span>
+                    <span class="text-primary"><a href="{{ path('livre-theme') }}">Thèmes</a></span>
+                    <span class="badge">{{ themes }}</span>
+                </span>
+
+                <span class="list-group-item text-left">
+                    <span class="glyphicon glyphicon-picture">&nbsp;</span>
+                    <span class="text-primary"><a href="{{ path('livre-couverture') }}">Couvertures</a></span>
+                    <span class="badge">{{ couvertures }}</span>
+                </span>
+                <div class="col-md-5"></div>
+            </div>
+        </div>
+    {% endblock %}

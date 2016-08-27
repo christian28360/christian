@@ -1,0 +1,45 @@
+#
+# INCLUDE
+################################################################################
+imports:
+    - { resource: config.yml }
+    - { resource: security_local.yml }
+################################################################################
+
+#
+# NTLM
+################################################################################
+ntlmInfos: 
+    codeRH: CA
+    domain: Local
+    workstation: Domicile
+################################################################################
+
+#
+# DOCTRINE
+################################################################################
+doctrine:
+    dbal:
+        configuration:
+            dbs.options:
+                christian:
+                    driverClass: %parameters_local_db_driverClass%
+                    port: 
+                    host: %parameters_local_db_host%
+                    dbname: christian
+                    user: %parameters_local_db_user%
+                    password: %parameters_local_db_password%
+################################################################################
+
+#
+# TWIG
+################################################################################
+twig:
+    configuration:
+        twig.options:
+            strict_variables: true
+            cache: <?php dirname(dirname(__DIR__)); ?>/cache/local
+        twig.path: <?php dirname(dirname(__DIR__)) . '/'; ?>
+#    globalsVar:
+#        baseRoutePrefix: /Portail/web
+################################################################################

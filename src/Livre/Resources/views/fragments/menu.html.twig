@@ -1,0 +1,147 @@
+<ul class="nav navbar-nav">
+
+    <li {% if menu == 'homepage' %} class="active"{% endif %}>
+        <a href="{{ path('livre-homepage') }}">Accueil</a>
+    </li>
+
+    <li class="dropdown{% if menu == 'Livres' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Livres<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('livre-livre-ajout') }}">
+                    Saisir un nouveau livre
+                </a>
+            </li>
+            <li {% if menu == 'livre' %} class="active"{% endif %}>
+                <a href="{{ path('livre-livre') }}">
+                    Liste de livres
+                </a>
+            </li>
+
+            <li class="divider"></li>
+            <li><b>Listes</b></li>
+
+            <li>
+                <a href="{{ path('livre-a-lire') }}">
+                    Livres à lire ou relire
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-avec-vocabulaire') }}">
+                    Livres avec vocabulaire
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-en-stock') }}">
+                    <b>Livres en stock</b>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-plus-en-stock') }}">
+                    Livres plus en stock
+                </a>
+            </li>
+
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('livre-ecrivain-livres') }}">
+                    Livres par écrivain
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-editeur-livres') }}">
+                    Livres par éditeur
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-theme-livres') }}">
+                    Livres par thème
+                </a>
+            </li>
+            <li{% if menu == 'liste' %} class="active"{% endif %}>
+                <a href="{{ path('livre-couverture-livres') }}">
+                    Livres par type de couverture
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li {% if menu == 'ecrivain' %} class="active"{% endif %}>
+        <a href="{{ path('livre-ecrivain') }}">
+            Ecrivains
+        </a>
+    </li>
+
+    <li {% if menu == 'editeur' %} class="active"{% endif %}>
+        <a href="{{ path('livre-editeur') }}">
+            Editeurs
+        </a>
+    </li>
+
+    <li {% if menu == 'theme' %} class="active"{% endif %}>
+        <a href="{{ path('livre-theme') }}">
+            Thèmes
+        </a>
+    </li>
+
+    <li {% if menu == 'couverture' %} class="active"{% endif %}>
+        <a href="{{ path('livre-couverture') }}">
+            Couvertures
+        </a>
+    </li>
+
+    <li class="dropdown{% if menu == 'liste' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Listes<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('livre-a-lire') }}">
+                    Livres à lire ou relire
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-avec-vocabulaire') }}">
+                    Livres avec vocabulaire
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-ecrivain-livres') }}">
+                    Livres par écrivain
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-editeur-livres') }}">
+                    Livres par éditeur
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('livre-theme-livres') }}">
+                    Livres par thème
+                </a>
+            </li>
+            <li{% if menu == 'liste' %} class="active"{% endif %}>
+                <a href="{{ path('livre-couverture-livres') }}">
+                    Livres par type de couverture
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            administration<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li{% if menu == 'administration' %} class="active"{% endif %}>
+                <a href="{{ path('livre-backup') }}">
+                    Sauvegarde des données
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

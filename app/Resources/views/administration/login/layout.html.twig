@@ -1,0 +1,18 @@
+{% extends "app/Resources/views/layout-portail.html.twig" %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('portail-si-admin-login-application') }}">Login</a>
+    </li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ baseRoutePrefix }}/css/common/admin-login.css" rel="stylesheet" />
+{% endblock %}
+
+{% block menu %}
+    {% set menu = 'portail-si-admin-login' %}
+    {% include 'app/Resources/views/administration/login/fragments/menu.html.twig' %}
+{% endblock %}

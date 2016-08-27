@@ -1,0 +1,142 @@
+{% extends "src/Livre/Resources/views/layout.html.twig" %}
+
+{% set menu = 'livre' %}
+{% set route = 'livre' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ menu }}s
+        <small>
+            {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-bordered table-hover table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Thème</th>
+                    <th class='w3'>Titre</th>
+                    <th>Auteur(s)</th>
+                    <th>Thème</th>
+                    <th>Editeur</th>
+                    <th>Couverture</th>
+                    <th>©</th>
+                    <th>Achat</th>
+                    <th>Prix</th>
+                    <th>Pages</th>
+                    <th>Remarques</th>
+                    <th>Lu</th>
+                    <th>Vocab.</th>
+                    <th>Stock</th>
+                    <th>Supp.</th>
+                </tr>
+            </thead>
+            <tbody> 
+                {% for livre in records %}
+                    <tr class="w2" 
+                        title="Double click pour modifier la ligne"
+                        id="{{ livre.id }}"
+                        >
+                        <td class="text-left">
+                            {{ livre.theme }}
+                        </td>
+                        <td class="text-left">
+                            {{ livre.titre }}
+                        </td>
+                        <td class="text-left">
+                            {% for auteur in livre.auteurs %}
+                                {{ auteur.prenomNom }}<br />
+                            {% else %}
+                                -----
+                            {% endfor %}
+                        </td>
+                        <td>{{ livre.theme.libelle }}</td>
+                        <td class="text-left">{{ livre.editeur.nom }}</td>
+                        <td class="text-left">{{ livre.couverture.libelle }}</td>
+                        <td class="text-center">
+                            {{ livre.anneeCopyright is null ? '-' : livre.anneeCopyright|number_format(0, '', '') }}
+                        </td>
+                        <td class="text-center">
+                            {{ (livre.dateAchat is null or livre.dateAchat|date('Y') == '-0001') ? '-' : livre.dateAchat|date('d/m/Y') }}
+                        </td>
+                        <td class="text-right">{{ livre.prixAchat|number_format(2, ',', ' ') }}</td>
+                        <td class="text-right">{{ livre.nbPages is null ? '-' : livre.nbPages|number_format(0, '', ' ') }}</td>
+                        <td class="text-left">{{ livre.remarques }}</td>
+                        <td class="text-center">
+                            <a href="{{ path(route ~ '-livre-update-col', {'id': livre.id, 'col': 'aLire'} ) }}">
+                                {% if livre.aLire != TRUE %}
+                                    <img width="100%" 
+                                         title="Ce lire a été lu, le marquer à relire"
+                                         src="{{ baseRoutePrefix }}/img/modules/livre/lu.ico" />
+                                {% else %}
+                                    <img width="100%" 
+                                         title="Marquer que que je viens de lire ce livre"
+                                         src="{{ baseRoutePrefix }}/img/modules/livre/aLire.ico" />
+                                {% endif %}
+                            </a>
+                        </td>
+
+                        <td class="text-center">
+                            {% if livre.vocabulaire == TRUE %}
+                                <img width="40%" 
+                                     title="Ce livre a du vocabulaire à apprendre"
+                                     src="{{ baseRoutePrefix }}/img/modules/livre/dictionnaire.ico" />
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path(route ~ '-livre-update-col', {'id': livre.id, 'col': 'enStock'} ) }}">
+                                {% if livre.enStock == TRUE %}
+                                    <img width="40%" 
+                                         title="Marquer que je n'ai pas/plus ce livre"
+                                         src="{{ baseRoutePrefix }}/img/modules/livre/etagerePleine.ico" />
+                                {% else %}
+                                    <img width="40%" 
+                                         title="Marquer que j'ai ce livre quelque part"
+                                         src="{{ baseRoutePrefix }}/img/modules/livre/etagereVide.ico" />
+                                {% endif %}
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path('livre-' ~ route ~ '-delete', {'id' : livre.id} ) }}"
+                               title="Supprimer l'enregistrement">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'src/Livre/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm'} %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+
+            var idLivre = 0;
+
+            $(document).on("dblclick", "tr", function (e) {
+
+                // Id du livre de la ligne double-cliquée
+                idLivre = $(e.target.parentNode).attr("id");
+
+                // reroutage sur le TD qui a été cliqué
+                window.location.href = "{{ path('livre-' ~ route ~ '-update' ) }}?id=" + idLivre;
+
+                return true;
+
+            });
+
+        });
+
+    </script> 
+{% endblock %}

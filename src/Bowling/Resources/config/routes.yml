@@ -1,0 +1,301 @@
+bowling-homepage:
+    path: /homepage
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\DefaultController::homeAction' }
+
+#############################################################################################
+## journées
+##
+bowling-journee-consult:
+    path: /journee/consult
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\JourneeController::listeAction' }
+
+bowling-journee-consult-reduit:
+    path: /journee/consult/reduit
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\JourneeController::listeReduitAction' }
+
+bowling-journee-ajout:
+    path: /journee/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\JourneeController::ajoutAction' }
+
+bowling-journee-update:
+    path: /journee/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\JourneeController::updateAction' }
+
+bowling-journee-controle-doublon:
+    path: /journee/controle
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\JourneeController::controleDoublonAction' }
+    requirements: 
+        evenement: \w+
+        date: \w+
+
+bowling-journee-delete:
+    path: /journee/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\JourneeController::deleteAction' }
+    requirements: 
+        id: \w+
+
+#############################################################################################
+## Organisateurs (de tournois)
+##
+bowling-organisateur:
+    path: /organisateur
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\OrganisateurController::listeAction' }
+
+bowling-organisateur-ajout:
+    path: /organisateur/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\OrganisateurController::ajoutAction' }
+
+bowling-organisateur-update:
+    path: /organisateur/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\OrganisateurController::updateAction' }
+
+bowling-organisateur-delete:
+    path: /organisateur/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\OrganisateurController::deleteAction' }
+
+#############################################################################################
+## Tournois
+##
+bowling-tournoi:
+    path: /tournoi
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::listeAction' }
+
+bowling-tournoi-planification:
+    path: /tournoi/planification
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::planificationAction' }
+
+bowling-tournoi-ajout:
+    path: /tournoi/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::ajoutAction' }
+
+bowling-tournoi-ajout-planification:
+    path: /tournoi/ajout/planification
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::ajoutPlanificationAction' }
+
+bowling-tournoi-ajout-planif:
+    path: /tournoi/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::ajoutPlanifAction' }
+
+bowling-tournoi-update:
+    path: /tournoi/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::updateAction' }
+
+bowling-tournoi-update-planification:
+    path: /tournoi/update/planification
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::updatePlanificationAction' }
+
+bowling-tournoi-duplicate:
+    path: /tournoi/duplicate
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::duplicateAction' }
+
+bowling-tournoi-delete:
+    path: /tournoi/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TournoiController::deleteAction' }
+
+#############################################################################################
+## Scores
+##
+bowling-score:
+    path: /score
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\ScoreController::listeAction' }
+
+bowling-score-ajout:
+    path: /score/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\ScoreController::ajoutAction' }
+
+bowling-score-saisie:
+    path: /score/saisie
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\ScoreController::saisieAction' }
+
+bowling-score-update:
+    path: /score/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\ScoreController::updateAction' }
+
+bowling-score-delete:
+    path: /score/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\ScoreController::deleteAction' }
+
+#############################################################################################
+## Formations
+##
+bowling-formation:
+    path: /formation
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\FormationController::listeAction' }
+
+bowling-formation-ajout:
+    path: /formation/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\FormationController::ajoutAction' }
+
+bowling-formation-update:
+    path: /formation/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\FormationController::updateAction' }
+
+bowling-formation-delete:
+    path: /formation/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\FormationController::deleteAction' }
+
+#############################################################################################
+## Bowlings
+##
+bowling-bowling:
+    path: /bowling
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\BowlingController::listeAction' }
+
+bowling-bowling-ajout:
+    path: /bowling/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\BowlingController::ajoutAction' }
+
+bowling-bowling-update:
+    path: /bowling/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\BowlingController::updateAction' }
+
+bowling-bowling-delete:
+    path: /bowling/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\BowlingController::deleteAction' }
+
+#############################################################################################
+## Types de jeu
+##
+bowling-type:
+    path: /typeJeu
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TypeJeuController::listeAction' }
+
+bowling-type-ajout:
+    path: /typeJeu/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TypeJeuController::ajoutAction' }
+
+bowling-type-update:
+    path: /typeJeu/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TypeJeuController::updateAction' }
+
+bowling-type-delete:
+    path: /typeJeu/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\TypeJeuController::deleteAction' }
+
+#############################################################################################
+## Evènements
+##
+bowling-evenement:
+    path: /evenement
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EvenementController::listeAction' }
+
+bowling-evenement-ajout:
+    path: /evenement/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EvenementController::ajoutAction' }
+
+bowling-evenement-update:
+    path: /evenement/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EvenementController::updateAction' }
+
+bowling-evenement-delete:
+    path: /evenement/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EvenementController::deleteAction' }
+
+#############################################################################################
+## Périodes (saisons)
+##
+bowling-periode:
+    path: /periode
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\PeriodeController::listeAction' }
+
+bowling-periode-ajout:
+    path: /periode/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\PeriodeController::ajoutAction' }
+
+bowling-periode-activate:
+  path: /periode/activation
+  defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\PeriodeController::activateAction' }
+
+bowling-periode-delete:
+    path: /periode/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\PeriodeController::deleteAction' }
+
+#############################################################################################
+## Statistiques
+##
+bowling-statistiques-courbe-tendance:
+    path: /bowling/statistiques/courbeTendance
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::courbeTendanceAction' }
+
+bowling-statistiques-courbe-tendance-graph:
+    path: /bowling/statistiques/courbeTendance/graphique
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::courbeTendanceGraphiqueAction' }
+
+bowling-statistiques-extremes:
+    path: /bowling/statistiques/extremes
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::extremesAction' }
+
+bowling-statistiques-extremes-graph:
+    path: /bowling/statistiques/extremes/graphique
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::extremesGraphiqueAction' }
+
+bowling-statistiques-tranches:
+    path: /bowling/statistiques/tranches
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::trancheAction' }
+
+bowling-statistiques-tranches-graph:
+    path: /bowling/statistiques/tranches/graphique
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::trancheGraphiqueAction' }
+
+bowling-statistiques-moyenne-mensuelle:
+    path: /bowling/statistiques/moyenne/mensuelle
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::moyenneMensuelleAction' }
+
+bowling-statistiques-moyenne-annuelle:
+    path: /bowling/statistiques/moyenne/annuelle
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::moyenneAnnuelleAction' }
+
+bowling-statistiques-recap-evenement:
+    path: /bowling/statistiques/recaptitulatif/evenement
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\StatistiquesController::recaptitulatifEvenementAction' }
+
+#############################################################################################
+## Entrainements
+##
+bowling-entrainement:
+    path: /entrainement
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EntrainementController::listeAction' }
+
+bowling-entrainement-sept-dix:
+    path: /entrainement/sept-dix
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EntrainementController::listeSeptDixAction' }
+
+bowling-entrainement-carnet-liste:
+    path: /entrainement/carnet/liste
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EntrainementController::carnetListeAction' }
+
+bowling-entrainement-carnet-ajout:
+    path: /entrainement/carnet/ajout
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EntrainementController::carnetAjoutAction' }
+
+bowling-entrainement-carnet-update:
+    path: /entrainement/carnet/update
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EntrainementController::carnetUpdateAction' }
+
+bowling-entrainement-carnet-delete:
+    path: /entrainement/carnet/delete
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EntrainementController::carnetDeleteAction' }
+
+#############################################################################################
+## Editions / outils
+## 
+bowling-editions-feuille-saisie:
+    path: /bowling/editions/feuille/saisie
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\EditionsController::feuilleSaisietAction' }
+
+bowling-outils-scorer:
+    path: /bowling/outils/scorer
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\OutilsController::scorerAction' }
+
+#############################################################################################
+## Sauvegardes (backups)
+##
+bowling-backup:
+    path: /bowling/backup
+    defaults: { _controller: 'CHRIST\Modules\Bowling\Controller\BackupController::backupAction' }
+    
+## Import données
+bowling-import-data:
+    path: /bowling/import
+    defaults: { _controller: 'CHRIST\Modules\bowling\Controller\ImportController::insertAction' }
+#############################################################################################

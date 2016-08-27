@@ -1,0 +1,96 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{%set menu = 'homepage' %}
+{% set route = 'bowling-journee' %}
+
+{% block metaTitle %}Gestion activité de bowling{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+
+    <div class="text-center">
+        <h1>Répartition</h1>
+        <h2>&nbsp;</h2>
+        <h2>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'f', 'titre': 'journee', } %}
+        </h2>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 list-group">
+                <span class="list-group-item active">
+                    <b>Données</b>
+                </span>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-2 list-group">
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Journées (saison)</span>
+                    <span class="badge">{{ journeesSaison }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Parties (saison)</span>
+                    <span class="badge">{{ partiesSaison }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Tournois (saison)</span>
+                    <span class="badge">{{ tournoisSaison }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Tournois à progr.</span>
+                    <span class="badge">{{ tournoisToPlanif }}</span>
+                </span>
+            </div>
+
+            <div class="col-md-2 list-group">
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Nombre de saisons</span>
+                    <span class="badge">{{ saisonsNombre }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Journées (totalité)</span>
+                    <span class="badge">{{ journeesTotalite }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Parties (totalité)</span>
+                    <span class="badge">{{ partiesTotalite }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Tournois (totalité)</span>
+                    <span class="badge">{{ tournoisTotalite }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Nombre de carnets</span>
+                    <span class="badge">{{ carnetsTotalite }}</span>
+                </span>
+            </div>
+
+            <div class="col-md-2 list-group">
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Bowlings</span>
+                    <span class="badge">{{ bowlings }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Types de jeu</span>
+                    <span class="badge">{{ typesJeu }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Saisons</span>
+                    <span class="badge">{{ periodes }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Formations</span>
+                    <span class="badge">{{ formations }}</span>
+                </span>
+                <span class="list-group-item text-left">
+                    <span class="text-primary">Evènements</span>
+                    <span class="badge">{{ evenements }}</span>
+                </span>
+            </div>
+        </div>
+    {% endblock %}

@@ -1,0 +1,66 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'journée' %}
+{% set route = 'journee' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>saison</li>
+    <li>Consultation/suivi tournois</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des tournois et championnats</h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>JnéeId</th>
+                    <th>Evt</th>
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Points</th>
+                    <th>Parties</th>
+                    <th>Moyenne</th>
+                    <th>X</th>
+                    <th>/</th>
+                    <th>Splits</th>
+                    <th>Finale</th>
+                    <th>Jouée</th>
+                    <th>Classement</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# pour chaque tournoi #}
+                {% for jnee in records %}
+                    <tr>
+                        <td>{{ jnee.journee.id }}</td>
+                        <td>{{ jnee.journee.evenement.libelle }}</td>
+                        <td>{{ jnee.journee.dateJournee|strftime('%a %d/%m/%y') }}</td>
+                        <td>{{ jnee.journee.bowling }}</td>
+                        <td>{{ jnee.journee.totalPoints }}</td>
+                        <td>{{ jnee.journee.nbScores }}</td>
+                        <td>{{ jnee.journee.moyenne|number_format(2, ',', ' ') }}</td>
+                        <td>X</td>
+                        <td>/</td>
+                        <td>Splits</td>
+                        <td class="text-center">
+                            {% if jnee.finale == TRUE %}
+                                <span class="glyphicon glyphicon-ok"></span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            {% if jnee.finaleJouee == TRUE %}
+                                <span class="glyphicon glyphicon-ok"></span>
+                            {% endif %}
+                        </td>
+                        <td>{{ jnee.classement }}/{{ jnee.nbJoueursOuEquipes }}</td>
+                    </tr>
+                {% endfor %}
+                {# Fin tournoi #}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

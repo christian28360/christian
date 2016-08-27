@@ -1,0 +1,130 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Référentiels' %}
+{% set titre = 'bowling' %}
+{% set route = 'bowling-bowling' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}s
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Nb jnées</th>
+                    <th>Nom</th>
+                    <th>Alias</th>
+                    <th>Commentaire</th>
+                    <th>Adresse</th>
+                    <th>Tél. 1</th>
+                    <th>Tél. 2</th>
+                    <th>eMail</th>
+                    <th>Site Web</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                    <th>MàJ</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr title="Double click pour modifier la ligne"
+                    id="{{ record.id }}"
+                    >
+                    <td class="text-center w1">
+                        <a href="{{ path(route ~ '-delete', {'id' : record.id} ) }}"
+                           title="Supprimer l'enregistrement">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                    <td class="text-center w1">{{ record.journees.count|number_format(0, ',', ' ') }}</td>
+                    <td class="text-left w1">{{ record.nom }}</td>
+                    <td class="text-left w1">{{ record.alias }}</td>
+                    <td class="text-left w1">{{ record.commentaire }}</td>
+                    <td class="text-left w1">
+                        {% if record.adrNo|length > 0 %}
+                            {{ record.adrNo }}
+                        {% endif %}
+                        {% if record.adrRue|length > 0 %}
+                            {{ record.adrRue }}<br />
+                        {% endif %}
+                        {{ record.adr1|length > 0 ? record.adr1 : '-' }}
+                        {% if record.adr2|length > 0 %}
+                            <br />{{ record.adr2 }}
+                        {% endif %}
+                        {% if record.adr3|length > 0 %}
+                            <br />{{ record.adr3 }}
+                        {% endif %}
+                        {% if record.ville|length > 0 %}
+                            <br />{{ record.adrCp|length > 0 ? record.adrCp ~ ' ' : '' }}{{ record.ville }}
+                        {% endif %}
+                        {#                        {% if record.pays|length > 0 %}
+                                                    <br />{{ record.pays }}
+                                                {% endif %}
+                        #}
+                    </td>
+                    <td class="text-left w1">{{ record.telephone1 }}</td>
+                    <td class="text-left w1">{{ record.telephone2 }}</td>
+                    <td class="text-left w1">{{ record.mail }}</td>
+                    <td class="text-left w1">
+                        <a href="http://{{ record.siteWeb }}"
+                           title="Accéder à son site web (nouvelle fenêtre)"
+                           target="_blank"
+                           >
+                            {{ record.siteWeb }}
+                        </a>
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.creeLE is null or record.creeLE|date('Y') == '-0001') ? '-' : record.creeLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ (record.modifieLE is null or record.modifieLE|date('Y') == '-0001') ? '-' : record.modifieLE|date('d/m/Y') }}
+                    </td>
+                    <td class="text-center w1">
+                        <a href="{{ path(route ~ '-update', {'id' : record.id} ) }}"
+                           title="Modifier l'enregistrement"
+                           alt="Modifier l'enregistrement" >
+                            <span class="glyphicon glyphicon-pencil">&nbsp;</span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type='text/javascript'>
+        $(document).ready(function () {
+
+            var idBowling = 0;
+
+            $(document).on("dblclick", "tr", function (e) {
+
+                // Id du bowling de la ligne double-cliquée
+                idBowling = $(e.target.parentNode).attr("id");
+
+                // reroutage sur le TD qui a été cliqué
+                window.location.href = "{{ path(route ~ '-update' ) }}?id=" + idBowling;
+
+                return true;
+
+            });
+
+        });
+
+    </script> 
+{% endblock %}

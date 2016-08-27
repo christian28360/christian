@@ -1,0 +1,26 @@
+#
+# DOCTRINE
+################################################################################
+doctrine:
+    orm:
+        configuration:
+            orm.ems.options:
+                christian:
+                    connection: christian
+                    mappings:
+                        dictionnaire:
+                            type: annotation
+                            namespace: CHRIST\Modules\Vocabulaire\Entity\Dictionnaire
+                            path: %parameters_path_rootModules%Vocabulaire/Entity
+                            use_simple_annotation_reader: false
+                        typeMot:
+                            type: annotation
+                            namespace: CHRIST\Modules\Vocabulaire\Entity\TypeMot
+                            path: %parameters_path_rootModules%Vocabulaire/Entity
+                            use_simple_annotation_reader: false
+                        mot:
+                            type: annotation
+                            namespace: CHRIST\Modules\Vocabulaire\Entity\Mot
+                            path: %parameters_path_rootModules%Vocabulaire/Entity
+                            use_simple_annotation_reader: false
+################################################################################

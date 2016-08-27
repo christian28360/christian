@@ -1,0 +1,16 @@
+<tr class="compact">
+    <td class="text-right">Partie {{ indexLoop is defined ? indexLoop : 'new' }}</td>
+    <td class="text-center dataScore">{{ form_row(scoresField.score) }}</td>
+    <td class="text-center">{{ form_row(scoresField.strike) }}</td>
+    <td class="text-center">{{ form_row(scoresField.spare) }}</td>
+    <td class="text-center">{{ form_row(scoresField.split) }}</td>
+    <td class="text-center">{{ form_row(scoresField.gagnee) }}</td>
+    <td class="text-center">{{ form_row(scoresField.PasCalculMoyenne) }}</td>
+    <td class="text-center dataEntrainement">{{ form_row(scoresField.surCarnetEntrainement) }}</td>
+    <td class="text-center">{{ form_row(scoresField.septDix) }}</td>
+    <td class="text-center">
+        <a href="#" class="deleteRow">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a>
+    </td>
+</tr>

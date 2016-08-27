@@ -1,0 +1,9 @@
+{% include 'app/Resources/views/fragments/menu-portail-vehicule.html.twig' %}
+
+<ul class="nav navbar-nav">
+    <li{% if menuApp == 'homepage' %} class="active"{% endif %}><a href="{{ path('portail-si-admin-login-homepage') }}">Accueil</a></li>
+    <li{% if menuApp == 'application' %} class="active"{% endif %}><a href="{{ path('portail-si-admin-login-application') }}">Application</a></li>
+    <li{% if menuApp == 'user' %} class="active"{% endif %}><a href="{{ path('portail-si-admin-login-user') }}">Utilisateur</a></li>
+</ul>
+        
+{% include 'app/Resources/views/fragments/menu-portail-admin.html.twig' %}

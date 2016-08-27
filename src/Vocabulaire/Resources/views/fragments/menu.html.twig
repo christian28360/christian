@@ -1,0 +1,81 @@
+<ul class="nav navbar-nav">
+
+    <li {% if menu == 'homepage' %} class="active"{% endif %}>
+        <a href="{{ path('vocabulaire-homepage') }}">Accueil</a>
+    </li>
+    <li class="dropdown{% if menu == 'Vocabulaire' %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Vocabulaire<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ path('vocabulaire-mot-liste-maj-postImport') }}">
+                    Màj Post import
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('vocabulaire-mot-liste-aChercher') }}">
+                    Mots à chercher, pas dans dico
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('vocabulaire-mot-ajout') }}">
+                    Saisie nouveau mot
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('vocabulaire-mot-liste') }}">
+                    Consultation de mots
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ path('vocabulaire-mot-liste-connus') }}">
+                    Les mots connus
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('vocabulaire-mot-liste-inconnus') }}">
+                    Les mots à apprendre
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li {% if menu == 'dictionnaire' %} class="active"{% endif %}>
+        <a href="{{ path('vocabulaire-dictionnaire-liste') }}">
+            Dictionnaires
+        </a>
+    </li>
+    <li {% if menu == 'Typologie' %} class="active"{% endif %}>
+        <a href="{{ path('vocabulaire-typeMot-liste') }}">
+            Typologie des mots
+        </a>
+    </li>
+</ul>
+{#{{ dump(config)}}#}
+<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            administration<b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li{% if menu == 'administration' %} class="active"{% endif %}>
+                <a href="{{ path('vocabulaire-backup') }}">
+                    Sauvegarde des données
+                </a>
+            </li>
+            <li class="divider"></li>
+                            <li title="
+                                Importer les données Access depuis l'export Excel
+                                vocabulaire.xlsx
+                                depuis app\Import">
+                                <a href="{{ path('vocabulaire-import-data') }}">
+                                    Importer un fichier
+                                </a>
+                            </li>
+                       
+        </ul>
+    </li>
+</ul>

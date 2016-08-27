@@ -1,0 +1,70 @@
+{% extends "src/Vocabulaire/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Vocabulaire' %}
+{% set titre = 'Mot' %}
+{% set route = 'vocabulaire-mot' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Ajout</li>
+    {% endblock %}
+
+{% block content %}
+
+    {% include 'app/Resources/views/fragments/titreMode.html.twig' with {'genre': 'm'} %}
+
+    {{ form_start(form, { 'attr': { 'role': 'form' }, 'method': 'post' }) }}
+
+    {{ form_errors(form) }}
+
+    {% include 'src/Vocabulaire/Resources/views/mot-form.html.twig' %}
+
+    {{ form_end(form) }}
+
+    <div class="modal fade modal-lg" id="wikipedia" tabindex="-1" role="dialog" aria-labelledby="Une erreur est survenue" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Recherche dans Wikipedia/wiktionary</h4>
+                </div>
+                <iframe width="400" height="300" frameborder="0" allowfullscreen="">
+                <h1>Iframe</h1>
+                </iframe>  
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}    
+    {{parent()}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            // Focus sur le premier champ d'input
+            $("input:first").focus();
+
+            // Enregistre et ajoute un nouveau mot (bouton 'MotForm_new') :
+            $(document).on("click", '#MotForm_new', function (e) {
+                $('#MotForm_nouveauMot').attr("checked", true);
+                $('form').submit();
+            });
+
+            $(document).on('mousedown', '.wiki', function (e) {
+
+                var a = $(this);
+                a.attr('href', a.attr('href') + $('#MotForm_mot').val().toLowerCase());
+
+                return true;
+            })
+
+        });
+    </script>
+{% endblock %}

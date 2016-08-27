@@ -1,0 +1,80 @@
+{% extends "src/Vocabulaire/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Vocabulaire' %}
+{% set titre = 'mot' %}
+{% set route = 'vocabulaire-mot' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ titre }}</li>
+    <li>Consultation</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation des {{ nbRecords }} {{ titre }}s {{ ( filter == 'connus' ) ? 'connus' : 'à apprendre' }}</h3>
+
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Mot</th>
+                    <th>Type</th>
+                    <th>Livre</th>
+                    <th>Page</th>
+                    <th>Signification</th>
+                    <th>Créé le</th>
+                    <th>Màj le</th>
+                </tr>
+            </thead>
+            {% for record in records %}
+                <tr>
+                    <td class="text-center">
+                        {% if record.aApprendre == TRUE %}
+                            {% set mess = 'Signaler que je connais ce mot' %}
+                        {% else %}
+                            {% set mess = 'Franchement je ne me rappelle plus de la signification de ce mot' %}
+                        {% endif %}
+                        <a href="{{ path(route ~ '-update-col', {'id' : record.id, 'col': 'aApprendre'} ) }}"
+                           title="{{ mess }}"
+                           alt="{{ mess }}" >
+                            <img width="100%" 
+                                 src="{{ baseRoutePrefix }}/img/modules/livre/dictionnaire.ico" />
+                        </a>
+                    </td>
+                    <td class="text-left">
+                        <b>{{ record.mot }}</b>
+                    </td>
+                    <td class="text-left">
+                        {{ record.typeMot is null ? '-' : record.typeMot }}
+                    </td>
+                    <td class="text-left">
+                        {% if record.livre is null %}
+                            Pas dans bibliothèque
+                        {% else %}
+                            {{ record.livre.titre|raw  }}
+                            {% for auteur in record.livre.auteurs %}
+                                <br />{{ auteur }}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td class="text-right">
+                        {{ record.page }}
+                    </td>
+                    <td class="text-left">
+                        {{ record.signification|raw }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ record.creeLE|date('Y/m/d') }}
+                    </td>
+                    <td class="text-center w1">
+                        {{ record.modifieLE|date('Y/m/d') }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

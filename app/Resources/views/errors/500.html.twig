@@ -1,0 +1,17 @@
+{% extends "app/Resources/views/layout.html.twig" %}
+
+{% block metaTitle %}Une erreur est survenue{% endblock %}
+
+{% block breadcrumb %}
+    <li>Erreur sur le site</li>
+{% endblock %}
+
+{% block menu %}{% endblock %}
+
+{% block content %}	
+    <h3>Une erreur est survenue</h3>
+    
+    <div class="hide">
+        {{ message }}
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Outils' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>Scoreur</li>
+    {% endblock %}
+
+{% block content %}
+    {{ parent() }}
+
+    <div class="text-center info">
+        <h1>Scoreur de bowling</h1>
+    </div>
+
+    <hr />
+
+    <div class="table-responsive">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <table class='table'>
+                <tr>
+                    {% for i in 1 .. 9 %}
+                        <td class='invisible'>&nbsp;</th>
+                        <th class='text-center'>1</th>
+                        <th class='text-center'>2</th>
+                        {% endfor %}
+                    <td class='invisible'>&nbsp;</th>
+                    <th class='text-center'>1</th>
+                    <th class='text-center'>2</th>
+                    <th class='text-center'>3</th>
+                <tr>
+                    {% for i in 1 .. 10 %}
+                        <td class='text-center' 
+                            colspan='{{ (i == 10) ? 4 : 3 }}'>
+                            Frame {{ i }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for i in 1 .. 9 %}
+                        <td>&nbsp;</td>
+                        <td class='text-center'
+                            id='f-{{ i }}-b-1'>
+                            x
+                        </td>
+                        <td class='text-center'
+                            id='f-{{ i }}-b-2'>
+                            y
+                        </td>
+                    {% endfor %}
+                    <td>&nbsp;</td>
+                    <td class='text-center'
+                        id='f-10-b-1'>
+                        x
+                    </td>
+                    <td class='text-center'
+                        id='f-10-b-2'>
+                        y
+                    </td>
+                    <td class='text-center'
+                        id='f-10-b-3'>
+                        z
+                    </td>
+                <tr>
+                <tr>
+                    {% for i in 1 .. 10 %}
+                        <td class='text-center' 
+                            colspan='{{ (i == 10) ? 4 : 3 }}'
+                            id='r-{{ i }}'>
+                            {{i * 10 }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+
+        </div>
+    {% endblock %}
+
+    {% block javascripts %}    
+        {{parent()}}
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var x, lig, col, boule;
+                var colFrame, strikes, spares;
+                var aff = new Array();
+                var total = new Array();
+                var score = new Array();
+
+                // init tableaux et scores
+                function raz() {
+                    total.length = 0;
+                    aff.length = 0;
+                    score.length = 0;
+
+                    // vide le html
+                    $('.data').each('');
+                }
+
+            });
+        </script>
+    {% endblock %}

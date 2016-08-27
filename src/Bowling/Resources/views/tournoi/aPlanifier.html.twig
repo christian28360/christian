@@ -1,0 +1,121 @@
+{% extends "src/Bowling/Resources/views/layout.html.twig" %}
+
+{% set menu = 'Tournois' %}
+{% set titre = 'tournoi' %}
+{% set route = 'bowling-tournoi' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>{{ menu }}</li>
+    <li>{{ menu }} à planifier</li>
+    {% endblock %}
+
+{% block content %}
+    <h3>Consultation de{{ nbRecords > 0 ? 's' : ''}}  {{ records|length }} {{ titre }}{{ nbRecords > 0 ? 's' : ''}}  à planifier
+        <small>
+            {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' 
+                    with {  'genre': 'm', 
+                            'titre': titre, 
+                            'retour': 'planification', 
+                        } %}
+        </small>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>MàJ</th>
+                    <th>Commentaire</th>
+                    <th>Type</th>
+                    <th>Date lim.<br />inscript.</th>
+                    <th>Date<br />inscript.</th>
+                    <th>Lieu</th>
+                    <th>Organisateur</th>
+                    <th>Prix</th>
+                    <th>Finale</th>
+                    <th>Class.</th>
+                    <th>Suppr.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# pour chaque tournoi #}
+                {% for tournoi in records %}
+                    <tr title="Double click pour modifier la ligne"
+                        id="{{ tournoi.id }}"
+                        >
+                        <td class="text-center">
+                            <a href="{{ path(route ~ '-update-planification', {"id": tournoi.id, 'retour': 'ici'} ) }}"
+                               title="Modifier le tournoi"
+                               alt="Modifier le tournoi" >
+                                <span class="glyphicon glyphicon-pencil">&nbsp;</span>
+                            </a>
+                            <a href="{{ path(route ~ '-duplicate', {'id': tournoi.id} ) }}"
+                               title="Dupliquer ce tournoi"
+                               alt="Dupliquer ce tournoi" >
+                                <img src="{{ baseRoutePrefix }}/img/modules/bowling/dupliquer.png" />
+                            </a>
+                        </td>
+                        <td>{{ tournoi.commentaire }}</td>
+                        <td>{{ tournoi.type }}</td>
+                        <td class="text-center">
+                            {{ tournoi.dateLimiteInscription is null ? '-' : tournoi.dateLimiteInscription|date('d/m/Y') }}
+                        </td>
+                        <td class="text-center">
+                            {{ tournoi.dateInscription is null ? '-' : tournoi.dateInscription|date('d/m/Y') }}
+                        </td>
+                        <td>{{ tournoi.bowling }}</td>
+                        <td>{{ tournoi.organisateur }}</td>
+                        <td class="text-right">
+                            {{ tournoi.prix is null ? '-' : tournoi.prix|number_format(2, ',', ' ') }}
+                        </td>
+                        <td class="text-center">
+                            {% if tournoi.finale == TRUE %}
+                                <span class="glyphicon glyphicon-ok"></span>
+                            {% endif %}
+                        </td>
+                        <td class="text-right">
+                            {{ tournoi.classement is null ? '-' : tournoi.classement }}
+                            /
+                            {{ tournoi.nbJoueursOuEquipes is null ? '-' : tournoi.nbJoueursOuEquipes }}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path(route ~ '-delete', {'id' : tournoi.id} ) }}"                           class            =   "supprimer-journee"
+                               title="Suppression du tournoi"
+                               alt="Suppression du tournoi"
+                               >
+                                <span class="glyphicon glyphicon-trash">&nbsp;</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {# Fin tournoi #}
+            </tbody>
+        </table>
+    </div>
+    {% include 'app/Resources/views/fragments/ajoutRecord.html.twig' with {'genre': 'm', 'titre': titre, } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+
+            var id = 0;
+
+            $(document).on("dblclick", "tr", function (e) {
+
+                // Id du bowling de la ligne double-cliquée
+                id = $(e.target.parentNode).attr("id");
+
+                // reroutage sur le TD qui a été cliqué
+                window.location.href = "{{ path(route ~ '-update' ) }}?id=" + id;
+
+                return true;
+
+            });
+
+        });
+
+    </script> 
+{% endblock %}

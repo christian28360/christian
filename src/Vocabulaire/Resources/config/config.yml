@@ -1,0 +1,50 @@
+#
+# INCLUDE
+################################################################################
+imports:
+    - { resource: doctrine.yml }
+    - { resource: parameters.yml }
+################################################################################
+
+#
+# CONFIGURATION
+################################################################################
+vocabulaire:
+    ftp:
+        configuration:
+            host: TheWebHoster
+            port: 2021
+            login: NotKnown
+            password: NotKnown
+    mail:
+        configuration:
+            from: 
+                - application.vocabulaire@gmail.com
+            to:
+                - christian.alcon@gmail.com
+                - christian.alcon@laposte.fr
+    import:
+        configuration:
+            dataPath: %parameters_path_rootImport%
+        manifests:
+            mot:
+                entityManager: \CHRIST\Modules\Vocabulaire\ImportManager\MotManager
+                wrappers:
+#                    - \CHRIST\Common\Kernel\Modules\Import\Wrappers\FtpWrapper
+                    - \CHRIST\Common\Kernel\Modules\Import\Wrappers\ExcelWrapper
+                file:   TB_Vocabulaire.xls
+                source: TB_Vocabulaire.xls
+                header:
+                    A1: LE
+                    C1: OEUVRE
+                    D1: MOT
+                    E1: PAGE
+                    F1: A_Chercher
+                    G1: Explication
+                    H1: NomDictionnaire
+                    I1: PasDansDictionnaire
+                    J1: A_apprendre
+                lines: 
+                    start: 2
+                    end: 0
+ ################################################################################
